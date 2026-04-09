@@ -1,0 +1,23 @@
+package com.boredgame.controller;
+
+import com.boredgame.entity.Users;
+import com.boredgame.repos.UsersRepos;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
+public class UserController {
+
+    private final UsersRepos userRepository;
+
+    public UserController(UsersRepos userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @PostMapping("/users")
+    public String saveUser(@RequestBody Users user) {
+        userRepository.save(user);
+        return "User saved!";
+    }
+}
