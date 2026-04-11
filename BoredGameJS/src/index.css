@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+login_form{
+  align-self: center;  
+  align-items: center;
+  align-content: center;
+}
