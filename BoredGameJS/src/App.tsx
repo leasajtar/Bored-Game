@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+//import reactLogo from './assets/react.svg'
+//import viteLogo from './assets/vite.svg'
+//import heroImg from './assets/hero.png'
+import './App.css';
 
 function App() {
   const [form, setForm] = useState({
@@ -15,18 +15,18 @@ function App() {
     phone: ""
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{ gender: number | null }>({
   gender: null
 });
 
-const handleChangeGender = (e) => {
+const handleChangeGender = (e: { target: { name: any; value: any } }) => {
   const { name, value } = e.target;
 
   setFormData(prev => ({
@@ -35,7 +35,7 @@ const handleChangeGender = (e) => {
   }));
 };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log(form);
     const payload = {
@@ -44,7 +44,7 @@ const handleChangeGender = (e) => {
       email: form.email,
       ime: form.ime,
       prezime: form.prezime,
-      gender: parseInt(formData.gender) || 0,
+      gender: formData.gender ?? 0,
       phone: form.phone
     };
     const res = await fetch("http://localhost:8080/api/users", {
