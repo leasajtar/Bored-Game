@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="BoredGame" type="Application" factoryName="Application">
+    <envs>
+      <env name="DATABASE_URL" value="jdbc:mysql://localhost:3306/boredgame" />
+      <env name="PASSWORD" value="rootpass" />
+      <env name="USERNAME" value="root" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.boredgame.BoredGameApplication" />
+    <module name="BoredGame" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
