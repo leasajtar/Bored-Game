@@ -4,8 +4,11 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
+<<<<<<< HEAD
 //testing smthn
 
+=======
+>>>>>>> 85fc8be3e8ef7332f40576a3e379309425aec124
 function App() {
   const [form, setForm] = useState({
     username: "",
