@@ -3,7 +3,6 @@ package com.boredgame.entity;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
-@Component
 @Entity
 @Table(name="users")
 public class Users {
