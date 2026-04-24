@@ -29,7 +29,7 @@ function App() {
 const handleChangeGender = (e: { target: { name: any; value: any } }) => {
   const { name, value } = e.target;
 
-  setFormData(prev => ({
+  setFormData((prev: any) => ({
     ...prev,
     [name]: Number(value)
   }));
