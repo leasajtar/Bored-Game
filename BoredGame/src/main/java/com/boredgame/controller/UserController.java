@@ -1,6 +1,6 @@
 package com.boredgame.controller;
 
-import com.boredgame.entity.Users;
+import com.boredgame.entity.User;
 import com.boredgame.repos.UsersRepos;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +15,8 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/users")
-    public String saveUser(@RequestBody Users user) {
+    @PostMapping("/login")
+    public String saveUser(@RequestBody User user) {
         System.out.println("Received user: " + user);
         userRepository.save(user);
         return "User saved!";

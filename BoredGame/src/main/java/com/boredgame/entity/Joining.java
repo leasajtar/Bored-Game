@@ -16,11 +16,11 @@ public class Joining {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Users user;
+    private User user;
 
     public Event getEvent() { return event; }
     public void setEvent(Event event) { this.event = event; }
 
-    public Users getUser() { return user; }
-    public void setUser(Users user) { this.user = user; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

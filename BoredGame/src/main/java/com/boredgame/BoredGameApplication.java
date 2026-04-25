@@ -10,7 +10,7 @@ public class BoredGameApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(BoredGameApplication.class, args);
-        // moja projena od leee
+
     }
 
 }

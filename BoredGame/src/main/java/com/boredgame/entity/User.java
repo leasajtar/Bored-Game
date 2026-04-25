@@ -1,11 +1,11 @@
 package com.boredgame.entity;
 
 import jakarta.persistence.*;
-import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="users")
-public class Users {
+@Table(name = "users")
+public class User {
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="userID")
@@ -25,8 +25,8 @@ public class Users {
     @Column(name="gender")
     private int gender;
 
-    public Users(){}
-    public Users(UserBuilder builder) {
+    public User(){}
+    public User(User.UserBuilder builder) {
         this.id = builder.id;
         this.username = builder.username;
         this.password = builder.password;
@@ -138,14 +138,15 @@ public class Users {
         }
 
 
-        public UserBuilder phone(String phone) {
+        public User.UserBuilder phone(String phone) {
             this.phone = phone;
             return this;
         }
 
-        public Users build() {
-            Users user = new Users(this);
+        public User build() {
+            User user = new User(this);
             return user;
         }
     }
 }
+
