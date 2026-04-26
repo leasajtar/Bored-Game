@@ -3,6 +3,10 @@ body {
     background-image: url("../images/wavy_black_lines_background_copy.jpg") !important;
     background-size: cover !important;
     margin: 0;
+    color: #341a21 !important;
+}
+a{
+    text-decoration: none;
 }
 
 .login_form {
@@ -82,10 +86,12 @@ body {
     border: 3px solid #341a21;
     font-weight: bold;
     color: #341a21;
+    width: fit-content;
 }
 
 .left_btns:hover,
-.login_btn:hover {
+.login_btn:hover,
+.login_submit_btn:hover{
     background-color: #f0dc9c;
     /*color: white;*/
 }
@@ -105,21 +111,54 @@ body {
 }
 
 /* ORGANIZE PAGE */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.date-time-row input {
+    border: 2px solid #341a21;
+    border-radius: 10px;
+}
 
 .organize {
     display: flex;
-    align-items: flex-start;
-    position: relative;
-    text-align: center;
+    flex-direction: column;
+    align-items: center;
+
+    width: fit-content;
+    max-width: 90%;
+
     padding: 10px;
-    margin-top: 20px;
-    margin-left: 20%;
-    margin-right: 20%;
     background-color: #dfede4;
     border-radius: 30px;
-    border: solid 4px #341a21;
-    overflow: hidden;
-    height: fit-content;
+    border: 4px solid #341a21;
+
+
+}
+
+.label-event{
+    padding: 15px;
+    padding-bottom: 30px;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #341a21;
+    text-align: center;
+}
+
+/* horizontal layout inside */
+.organize-content {
+    display: flex;
+    gap: 20px;
+
+}
+
+/* center button nicely */
+.submit-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .hangout-info {
@@ -132,11 +171,14 @@ body {
 
 .cafe {
     padding: 10px;
+    border: 3px solid #341a21;
+    border-radius: 10px;
 }
 
 .players {
     padding: 10px;
     padding-top: 0;
+
 }
 
 .players-row {
@@ -150,6 +192,7 @@ body {
 .players-row label {
     margin: 0;
     white-space: nowrap;
+    font-weight: bold;
 }
 
 .players-row input {
@@ -160,7 +203,7 @@ body {
     max-height: 450px;
     max-width: fit-content;
     overflow-y: auto;
-    border: 2px solid #ccc;
+    border: 3px solid #341a21;
     border-radius: 10px;
     padding: 10px;
     background: white;
@@ -178,6 +221,14 @@ body {
     gap: 15px;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    color: #341a21;
+}
+
+.list-item:hover {
+    background-color: #f0dc9c;
+}
+.selected-game{
+    background-color: #f0dc9c;
 }
 
 .list-item img {
@@ -202,8 +253,12 @@ body {
 }
 
 .left-panel {
+    display: flex;
     width: 500px;
     padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .right-panel {
@@ -211,6 +266,92 @@ body {
     width: 50%;
     max-height: 500px;
 }
+
+.info-tooltip {
+    position: relative;
+    display: inline-block;
+
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+
+    background-color: #341a21;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    line-height: 25px;
+
+    cursor: pointer;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.info-tooltip::-webkit-scrollbar {
+    display: none;
+}
+
+.levels-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.date-time-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.date-time-row label {
+    margin: 0;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+/* hidden popup */
+.info-tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 15px;
+    font-weight: lighter;
+
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: translateX(-50%);
+
+    width: 700px;
+    max-height: 300px;
+    overflow-y: auto;
+
+    background-color: #f0dc9c;
+    color: #341a21;
+
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #341a21;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    z-index: 100;
+}
+
+/* show on hover */
+.info-tooltip:hover .info-tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.info-tooltip.active .info-tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+
 
 /* LEVEL BUTTONS */
 
@@ -282,7 +423,7 @@ body {
 
 .sidebar-title {
     font-weight: bold;
-    color: #71816D;
+    color: #341a21;
     margin-bottom: 14px;
     font-size: 1.6rem;
 }

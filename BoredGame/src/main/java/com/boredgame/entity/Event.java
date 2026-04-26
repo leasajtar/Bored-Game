@@ -1,4 +1,3 @@
-// Event.java
 package com.boredgame.entity;
 
 import jakarta.persistence.*;
@@ -9,36 +8,45 @@ import java.util.List;
 @Entity
 @Table(name = "events")
 public class Event {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String game_name;       // "Catan", "Uno", itd.
+    private String game_name;
     private LocalDateTime event_datetime;
-    private Integer max_players;      // max broj igrača uključujući organizatora
+    private Integer max_players;
     private String status;
+    private String level;
 
-    // @ManyToOne znači: više dogadaja može biti u jednom kafiću
     @ManyToOne
-    @JoinColumn(name = "cafe_id")  // u tablici postoji stupac kafic_id
+    @JoinColumn(name = "cafe_id")
     private Cafe cafe_id;
 
     @ManyToOne
     @JoinColumn(name = "organizer_id")
     private User organizer_id;
 
-    // @OneToMany: jedan dogadaj ima puno pridruzivanja
-    // mappedBy = "dogadaj" znači da je veza definirana u klasi Pridruzivanje
     @OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
     private List<Joining> joinings = new ArrayList<>();
 
-    // Getteri i setteri
-    public Integer getId() { return id; }
-    public String getNazivIgre() { return game_name; }
-    public LocalDateTime getDatumVrijeme() { return event_datetime; }
-    public Integer getMaxPlayers() { return max_players; }
-    public String getStatus() { return status; }
-    public Cafe getKafic() { return cafe_id; }
-    public User getOrganizator() { return organizer_id; }
-    public List<Joining> getPridruzivanja() { return joinings; }
+    // --- Getters (unchanged) ---
+    public Integer getId()                    { return id; }
+    public String getNazivIgre()              { return game_name; }
+    public LocalDateTime getDatumVrijeme()    { return event_datetime; }
+    public Integer getMaxPlayers()            { return max_players; }
+    public String getStatus()                 { return status; }
+    public Cafe getKafic()                    { return cafe_id; }
+    public User getOrganizator()              { return organizer_id; }
+    public List<Joining> getPridruzivanja()   { return joinings; }
+    public String getLevel()                  { return level; }
+
+    // --- Setters (new) ---
+    public void setGameName(String gameName)          { this.game_name = gameName; }
+    public void setEventDatetime(LocalDateTime dt)    { this.event_datetime = dt; }
+    public void setMaxPlayers(Integer maxPlayers)     { this.max_players = maxPlayers; }
+    public void setStatus(String status)              { this.status = status; }
+    public void setLevel(String level)                { this.level = level; }
+    public void setCafe(Cafe cafe)                    { this.cafe_id = cafe; }
+    public void setOrganizer(User organizer)          { this.organizer_id = organizer; }
 }

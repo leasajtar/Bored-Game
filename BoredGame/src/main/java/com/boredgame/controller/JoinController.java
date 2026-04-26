@@ -36,7 +36,7 @@ public class JoinController {
         }
 
         Optional<Event> eventOpt = eventRepo.findById(eventId);
-        Optional<User> userOpt = usersRepos.findById((long) userId);
+        Optional<User> userOpt = usersRepos.findById(userId);
 
         if (eventOpt.isEmpty() || userOpt.isEmpty()) {
             return "redirect:/find";

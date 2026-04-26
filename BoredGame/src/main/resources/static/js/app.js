@@ -1,33 +1,45 @@
-const form = document.getElementById("userForm");
+console.log("app.js loaded");
 
-if (form) {
-    form.addEventListener("submit", async function (e) {
+// GAME SELECT FUNCTION - must be global
+function pickGame(gameName, element) {
+    const gameInput = document.getElementById("game_name");
+
+    if (!gameInput) {
+        console.error("Hidden input #game_name not found");
+        return;
+    }
+
+    gameInput.value = gameName;
+
+    document.querySelectorAll(".list-item").forEach(item => {
+        item.classList.remove("selected-game");
+    });
+
+    element.classList.add("selected-game");
+
+    console.log("Selected game:", gameName);
+}
+
+// USER FORM
+const userForm = document.getElementById("userForm");
+
+if (userForm) {
+    userForm.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        // rest of your code here
-    });
-}
-form.addEventListener("submit", async function (e) {
-    e.preventDefault(); // keep this so fetch works
+        const formData = new FormData(userForm);
 
-    const formData = new FormData(form);
+        const userPayload = {
+            username: formData.get("username"),
+            password: formData.get("password"),
+            email: formData.get("email"),
+            ime: formData.get("ime"),
+            prezime: formData.get("prezime"),
+            gender: parseInt(formData.get("gender")) || 0,
+            phone: formData.get("phone")
+        };
 
-    // USER payload
-    const userPayload = {
-        username: formData.get("username"),
-        password: formData.get("password"),
-        email: formData.get("email"),
-        ime: formData.get("ime"),
-        prezime: formData.get("prezime"),
-        gender: parseInt(formData.get("gender")) || 0,
-        phone: formData.get("phone")
-    };
-
-    console.log("User:", userPayload);
-
-    try {
-        // 1️⃣ SEND USER
-        const res = await fetch("http://localhost:8080/api/users", {
+        const res = await fetch("/api/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -35,49 +47,55 @@ form.addEventListener("submit", async function (e) {
             body: JSON.stringify(userPayload)
         });
 
-        const userText = await res.text();
-        console.log(userText);
+        const text = await res.text();
+        alert(text);
+    });
+}
 
-        // ✅ USER ALERT
-        alert("User: " + userText);
+// EVENT FORM
+const eventForm = document.getElementById("eventForm");
 
-    } catch (error) {
-        console.error("User error:", error);
-        alert("User saving failed!");
-        return; // stop if user fails
-    }
+if (eventForm) {
+    eventForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-    // 2️⃣ EVENT payload
-    const eventPayload = {
-        game_name: "Catan",
-        event_datetime: "2026-05-01T18:00:00",
-        max_players: 4,
-        status: "OPEN",
-        cafe_id: { id: 1 },
-        organizer_id: { id: 1 }
-    };
+        const formData = new FormData(eventForm);
 
-    console.log("Event:", eventPayload);
+        const payload = {
+            game_name:   formData.get("game_name"),
+            max_players: Number(formData.get("max_players")),
+            status: "OPEN",
+            event_datetime: formData.get("event_datetime"),
+            cafe_id:     Number(formData.get("cafe_id")),
+            level:       formData.get("level")
+        };
 
-    try {
-        const res2 = await fetch("/organiziranje.html/events", {
+        console.log("Event payload:", payload);
+
+        if (!payload.cafe_id) {
+            alert("Odaberi kafić.");
+            return;
+        }
+        if (!payload.game_name) {
+            alert("Odaberi igru.");
+            return;
+        }
+        if (!payload.level) {
+            alert("Odaberi razinu.");
+            return;
+        }
+
+        const res = await fetch("/organiziranje/events", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(eventPayload)
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
         });
 
-        const eventText = await res2.text();
-        console.log(eventText);
-
-        // ✅ EVENT ALERT
-        alert("Event: " + eventText);
-
-    } catch (error) {
-        console.error("Event error:", error);
-        alert("Event saving failed!");
-    }
-
-    console.log("app.js loaded");
-});
+        const text = await res.text();
+        if (res.ok) {
+            window.location.href = "/find";  // redirect on success
+        } else {
+            alert("Greška: " + text);
+        }
+    });
+}
