@@ -1,3 +1,7 @@
+a{
+ 
+}
+
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-image: url("../images/wavy_black_lines_background_copy.jpg") !important;
@@ -245,6 +249,28 @@ body{
     border: none;
     display: block;
 }
+/* Dodati na kraj style.css pokusaj za dio sa sessionom*/
 
+.error-msg {
+    background-color: #f8d7da;
+    border: 1px solid #341a21;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #341a21;
+    font-size: 0.88rem;
+    margin-bottom: 10px;
+}
+
+.no-events {
+    color: #71816d;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.nav-username {
+    font-weight: bold;
+    color: #341a21;
+    margin-right: 8px;
+}
 /*KRAJ FIND STRANICE*/
 

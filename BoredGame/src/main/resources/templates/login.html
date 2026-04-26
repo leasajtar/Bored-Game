@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://kit.fontawesome.com/34542901a1.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- HEADER -->
+<section class="nav-bar">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center">
+            <div>
+                <a th:href="@{/find}" class="left_btns">Find</a>
+                <button class="left_btns">Organize</button>
+                <button class="left_btns">Contact</button>
+            </div>
+            <div class="flex-grow-1"></div>
+            <div>
+                <a th:href="@{/login}" class="login_btn">Log In</a>
+                <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="login">
+    <h2>Log In:</h2>
+
+    <p th:if="${param.error}" style="color: red;">Krivo korisničko ime ili lozinka.</p>
+
+    <div class="login_form">
+        <form action="/login" method="post">
+            <input name="username" placeholder="Username" required><br>
+            <input name="password" placeholder="Password" type="password" required><br>
+            <button class="login_submit_btn" type="submit">Prijavi se</button>
+        </form>
+    </div>
+
+    <p style="margin-top: 12px;">Nemaš račun? <a th:href="@{/register}">Registriraj se</a></p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
