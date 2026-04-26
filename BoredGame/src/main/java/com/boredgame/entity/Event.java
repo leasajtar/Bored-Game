@@ -25,7 +25,7 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "organizer_id")
-    private Users organizer_id;
+    private User organizer_id;
 
     // @OneToMany: jedan dogadaj ima puno pridruzivanja
     // mappedBy = "dogadaj" znači da je veza definirana u klasi Pridruzivanje
@@ -36,9 +36,9 @@ public class Event {
     public Integer getId() { return id; }
     public String getNazivIgre() { return game_name; }
     public LocalDateTime getDatumVrijeme() { return event_datetime; }
-    public Integer getMaxIgraca() { return max_players; }
+    public Integer getMaxPlayers() { return max_players; }
     public String getStatus() { return status; }
     public Cafe getKafic() { return cafe_id; }
-    public Users getOrganizator() { return organizer_id; }
+    public User getOrganizator() { return organizer_id; }
     public List<Joining> getPridruzivanja() { return joinings; }
 }
