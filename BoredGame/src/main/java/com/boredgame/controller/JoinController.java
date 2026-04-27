@@ -64,4 +64,27 @@ public class JoinController {
 
         return "redirect:/find";
     }
+
+    @PostMapping("/leave")
+    public String leave(@RequestParam Integer eventId, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        // Can't leave an event you organised
+        Optional<Event> eventOpt = eventRepo.findById(eventId);
+        if (eventOpt.isEmpty()) {
+            return "redirect:/find";
+        }
+        if (eventOpt.get().getOrganizator() != null &&
+                eventOpt.get().getOrganizator().getId() == userId) {
+            return "redirect:/find?error=cant_leave_own_event";
+        }
+
+        // Delete the joining record
+        joiningRepo.deleteByEventIdAndUserId(eventId, userId);
+
+        return "redirect:/find";
+    }
 }

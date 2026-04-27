@@ -426,6 +426,14 @@ a:active {
     align-items: center;
     justify-content: space-between;
     gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.event-card form{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .event-card::before {

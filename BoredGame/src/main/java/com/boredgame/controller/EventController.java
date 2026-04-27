@@ -3,6 +3,7 @@ package com.boredgame.controller;
 import com.boredgame.entity.*;
 import com.boredgame.repos.CafeRepos;
 import com.boredgame.repos.EventRepo;
+import com.boredgame.repos.JoiningRepo;
 import com.boredgame.repos.UsersRepos;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
@@ -22,11 +23,13 @@ public class EventController {
     private final EventRepo eventRepository;
     private final CafeRepos CafeRepos;
     private final UsersRepos usersRepos;
+    private final JoiningRepo joiningRepo;
 
-    public EventController(EventRepo eventRepository, CafeRepos CafeRepos, UsersRepos usersRepos) {
+    public EventController(EventRepo eventRepository, CafeRepos CafeRepos, UsersRepos usersRepos, JoiningRepo joiningRepo) {
         this.eventRepository = eventRepository;
         this.CafeRepos = CafeRepos;
         this.usersRepos = usersRepos;
+        this.joiningRepo = joiningRepo;
     }
 
     @GetMapping("/organiziranje/events")
@@ -59,14 +62,13 @@ public class EventController {
 
     @PostMapping("/organiziranje/events")
     public ResponseEntity<String> createEvent(
-            @RequestBody EventRequest request,   // ← was @RequestParam, now @RequestBody
+            @RequestBody EventRequest request,
             HttpSession session
     ) {
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in");
         }
-
         if (request.getGame_name() == null || request.getGame_name().isBlank()) {
             return ResponseEntity.badRequest().body("No game selected");
         }
@@ -87,10 +89,21 @@ public class EventController {
         event.setCafe(cafeOpt.get());
         event.setOrganizer(userOpt.get());
         event.setLevel(request.getLevel());
-        event.setEventDatetime(LocalDateTime.now());
+        LocalDateTime parsedDatetime = LocalDateTime.parse(
+                request.getEvent_datetime(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")
+        );
+        event.setEventDatetime(parsedDatetime);
         event.setStatus("open");
 
-        eventRepository.save(event);
+        Event savedEvent = eventRepository.save(event); // capture saved event with its new ID
+
+        // Auto-join the organizer into the joinings table
+        Joining organizerJoining = new Joining();
+        organizerJoining.setEvent(savedEvent);
+        organizerJoining.setUser(userOpt.get());
+        joiningRepo.save(organizerJoining);
+
         return ResponseEntity.ok("Event saved!");
     }
 }

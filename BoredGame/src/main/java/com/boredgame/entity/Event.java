@@ -1,5 +1,6 @@
 package com.boredgame.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class Event {
     private Integer id;
 
     private String game_name;
-    private LocalDateTime event_datetime;
-    private Integer max_players;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime event_datetime;    private Integer max_players;
     private String status;
     private String level;
 

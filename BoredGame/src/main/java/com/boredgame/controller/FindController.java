@@ -31,23 +31,31 @@ public class FindController {
         Map<Integer, Integer> currentPlayers = new HashMap<>();
         Map<Integer, Boolean> userJoined = new HashMap<>();
         Map<Integer, Boolean> isFull = new HashMap<>();
+        Map<Integer, Boolean> isOrganizer = new HashMap<>();  // NEW
 
         for (Event event : events) {
-            int joined = joiningRepo.countByEventId(event.getId()) + 1; // +1 organizator
+            int joined = joiningRepo.countByEventId(event.getId()); // no more +1, organizer is in joinings now
             currentPlayers.put(event.getId(), joined);
+
             Integer maxPlayers = event.getMaxPlayers();
-            if (maxPlayers == null) {
-                maxPlayers = 4;
-            }
-            isFull.put(event.getId(), joined >= event.getMaxPlayers());
+            if (maxPlayers == null) maxPlayers = 4;
+
+            isFull.put(event.getId(), joined >= maxPlayers);
             userJoined.put(event.getId(),
                     userId != null && joiningRepo.existsByEventIdAndUserId(event.getId(), userId));
+
+            // Check if this user is the organizer of this event
+            isOrganizer.put(event.getId(),
+                    userId != null &&
+                            event.getOrganizator() != null &&
+                            event.getOrganizator().getId() == userId);  // NEW
         }
 
         model.addAttribute("events", events);
         model.addAttribute("currentPlayers", currentPlayers);
         model.addAttribute("userJoined", userJoined);
         model.addAttribute("isFull", isFull);
+        model.addAttribute("isOrganizer", isOrganizer);  // NEW
         model.addAttribute("loggedIn", userId != null);
         model.addAttribute("username", session.getAttribute("username"));
 
