@@ -426,11 +426,9 @@ a:active {
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-
     flex-wrap: wrap;
 }
-
-.event-card form{
+.event-card form {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -592,4 +590,88 @@ a:active {
     color: inherit;
     cursor: pointer;
 
+}
+@media (max-width: 900px) {
+    .organize-content {
+        flex-direction: column; /* 🔥 stack umjesto side-by-side */
+        align-items: center;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .right-panel {
+        max-height: none; /* da lista ne bude stisnuta */
+    }
+
+    .scroll-list {
+        max-width: 100%;
+    }
+}
+@media (max-width: 600px) {
+
+    .organize {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .label-event {
+        font-size: 1.5rem;
+        padding-bottom: 15px;
+    }
+
+    .levels-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .levels-group {
+        flex-wrap: wrap; /* da buttoni ne izlaze */
+        justify-content: center;
+    }
+
+    .date-time-row {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .players-row {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .players-row input {
+        width: 100%;
+    }
+
+    .cafe {
+        width: 100%;
+    }
+
+    .list-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-item img {
+        width: 100%;
+        height: auto;
+    }
+
+    .item-info {
+        width: 100%;
+    }
+    .info-tooltip-text {
+        width: 250px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .organize {
+        width: 100%;
+    }
 }
