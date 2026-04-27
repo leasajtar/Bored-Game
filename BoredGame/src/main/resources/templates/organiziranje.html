@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xml:lang="hr" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Organize</title>
+    <title>Organiziraj</title>
     <meta charset="utf-8">
 
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -22,12 +22,9 @@
                 <img th:src="@{/images/logo.png}" alt="bored game logo" height="50">
             </div>
             <div>
-                <a th:href="@{/find}">
-                    <button class="left_btns">Find</button>
-                </a>
-                <a th:href="@{/organiziranje}">
-                    <button class="left_btns">Organize</button>
-                </a>
+                <a th:href="@{/find}"><button class="left_btns">Pronađi</button></a>
+                <a th:href="@{/organiziranje}"><button class="left_btns">Organiziraj</button></a>
+
             </div>
 
             <!-- SPACER -->
@@ -36,18 +33,16 @@
             <!-- RIGHT SIDE: ulogiran -->
             <div th:if="${loggedIn}">
                 <span class="nav-username" th:text="'Hej, ' + ${username}"></span>
-                <a th:href="@{/logout}">
-                    <button class="login_btn">Log Out</button>
-                </a>
+                <a th:href="@{/logout}" ><button class="login_btn">Log Out</button></a>
             </div>
             <!-- RIGHT SIDE: nije ulogiran -->
             <div th:unless="${loggedIn}">
-                <a th:href="@{/login}">
-                    <button class="login_btn">Log In</button>
-                </a>
+                <a th:href="@{/login}" ><button class="login_btn">Log In</button></a>
             </div>
 
-            <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
+            <a th:href="@{/aboutus}">
+                <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
+            </a>
         </div>
     </div>
 </section>
@@ -107,7 +102,7 @@
                     </option>
                 </select>
                 <div class="players-row">
-                    <label for="max_players" class="form-label">Max players:</label>
+                    <label for="max_players" class="form-label">Max igrača:</label>
 
                     <div class="players">
                         <input
@@ -137,8 +132,8 @@
                             <img th:src="@{/images/alias-logo.png}" alt="game">
                             <div class="item-info">
                                 <h5>Alias</h5>
-                                <p>Max players: 4</p>
-                                <p>Type: Riječi</p>
+                                <p>Max igrača: 4</p>
+                                <p>Tip: Riječi</p>
                             </div>
                         </div>
 
@@ -146,8 +141,8 @@
                             <img th:src="@{/images/briškule.jpg}" alt="game">
                             <div class="item-info">
                                 <h5>Briškule</h5>
-                                <p>Max players: 8</p>
-                                <p>Type: Karte</p>
+                                <p>Max igrača: 8</p>
+                                <p>Tip: Karte</p>
                             </div>
                         </div>
 
@@ -155,8 +150,8 @@
                             <img th:src="@{/images/Catan.jpg}" alt="game">
                             <div class="item-info">
                                 <h5>Catan</h5>
-                                <p>Max players: 4</p>
-                                <p>Type: Strategije</p>
+                                <p>Max igrača: 4</p>
+                                <p>Tip: Strategije</p>
                             </div>
                         </div>
 
@@ -164,8 +159,8 @@
                             <img th:src="@{/images/Exploding_Kittens.png}" alt="game">
                             <div class="item-info">
                                 <h5>Exploding Kittens</h5>
-                                <p>Max players: 5</p>
-                                <p>Type: Karte</p>
+                                <p>Max igrača: 5</p>
+                                <p>Tip: Karte</p>
                             </div>
                         </div>
 
@@ -173,8 +168,8 @@
                             <img th:src="@{/images/monopoly.png}" alt="game">
                             <div class="item-info">
                                 <h5>Monopoly</h5>
-                                <p>Max players: 8</p>
-                                <p>Type: Strategije</p>
+                                <p>Max igrača: 8</p>
+                                <p>Tip: Strategije</p>
                             </div>
                         </div>
 
@@ -182,8 +177,8 @@
                             <img th:src="@{/images/poker.jpg}" alt="game">
                             <div class="item-info">
                                 <h5>Poker</h5>
-                                <p>Max players: 6</p>
-                                <p>Type: Karte</p>
+                                <p>Max igrača: 6</p>
+                                <p>Tip: Karte</p>
                             </div>
                         </div>
 
@@ -191,8 +186,8 @@
                             <img th:src="@{/images/risk.jpg}" alt="game">
                             <div class="item-info">
                                 <h5>Risk</h5>
-                                <p>Max players: 6</p>
-                                <p>Type: Strategije</p>
+                                <p>Max igrača: 6</p>
+                                <p>Tip: Strategije</p>
                             </div>
                         </div>
 
@@ -200,8 +195,8 @@
                             <img th:src="@{/images/scrabble.png}" alt="game">
                             <div class="item-info">
                                 <h5>Scrabble</h5>
-                                <p>Max players: 4</p>
-                                <p>Type: Riječi</p>
+                                <p>Max igrača: 4</p>
+                                <p>Tip: Riječi</p>
                             </div>
                         </div>
 
@@ -209,8 +204,8 @@
                             <img th:src="@{/images/uno.png}" alt="game">
                             <div class="item-info">
                                 <h5>Uno</h5>
-                                <p>Max players: 8</p>
-                                <p>Type: Karte</p>
+                                <p>Max igrača: 8</p>
+                                <p>Tip: Karte</p>
                             </div>
                         </div>
 
@@ -218,8 +213,8 @@
                             <img th:src="@{/images/wolf.jpg}" alt="game">
                             <div class="item-info">
                                 <h5>Vukodlak</h5>
-                                <p>Max players: 8</p>
-                                <p>Type: Dedukcija</p>
+                                <p>Max igrača: 8</p>
+                                <p>Tip: Dedukcija</p>
                             </div>
                         </div>
 
@@ -227,8 +222,8 @@
                             <img th:src="@{/images/chess.png}" alt="game">
                             <div class="item-info">
                                 <h5>Šah</h5>
-                                <p>Max players: 2</p>
-                                <p>Type: Strategije</p>
+                                <p>Max igrača: 2</p>
+                                <p>Tip: Strategije</p>
                             </div>
                         </div>
 

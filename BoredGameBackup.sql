@@ -83,9 +83,13 @@ CREATE TABLE `joinings` (
   KEY `FKk79q6rmx6etormod7r9oebkij` (`user_id`),
   CONSTRAINT `FKgxlhgukacrhprvyg8vh7d8no` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
   CONSTRAINT `FKk79q6rmx6etormod7r9oebkij` FOREIGN KEY (`user_id`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `joinings` */
+
+insert  into `joinings`(`id`,`event_id`,`user_id`) values 
+(3,52,12),
+(4,52,13);
 
 /*Table structure for table `users` */
 

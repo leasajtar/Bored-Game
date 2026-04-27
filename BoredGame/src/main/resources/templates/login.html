@@ -20,8 +20,8 @@
                 <img th:src="@{/images/logo.png}" alt="bored game logo" height="50">
             </div>
             <div>
-                <a th:href="@{/find}"><button class="left_btns">Find</button></a>
-                <a th:href="@{/organiziranje}"><button class="left_btns">Organize</button></a>
+                <a th:href="@{/find}"><button class="left_btns">Pronađi</button></a>
+                <a th:href="@{/organiziranje}"><button class="left_btns">Organiziraj</button></a>
 
             </div>
 
@@ -38,7 +38,9 @@
                 <a th:href="@{/login}" ><button class="login_btn">Log In</button></a>
             </div>
 
-            <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
+            <a th:href="@{/aboutus}">
+                <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
+            </a>
         </div>
     </div>
 </section>
