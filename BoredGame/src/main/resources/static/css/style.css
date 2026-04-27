@@ -15,10 +15,72 @@ a:active {
     text-decoration: none;
 }
 
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+}
+
+/* DESKTOP MENU */
+.nav-links {
+    display: flex;
+}
+
+/* HAMBURGER (hidden by default) */
+.hamburger-btn {
+    display: none;
+    padding: 10px;
+    margin: 10px;
+    color: #341a21;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* MOBILE DROPDOWN */
+.nav-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    background: #dfede4;
+    border: 3px solid #341a21;
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.nav-menu a {
+
+    text-decoration: none;
+    color: #341a21;
+    font-weight: bold;
+}
+
+.nav-menu.show {
+    display: flex;
+}
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+/* RIGHT SIDE */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .nav-bar {
     position: relative;
     background-color: #ab1869;
-    overflow: hidden;
+    overflow: visible;
+    z-index: 9999;
 }
 
 .nav-bar::before {
@@ -391,6 +453,7 @@ a:active {
     padding: 16px;
     position: relative;
     background-color: rgba(255, 255, 255, 0.81);
+    z-index: 1;
 }
 
 .find-sidebar::before {
@@ -611,7 +674,37 @@ a:active {
         max-width: 100%;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 728px) {
+
+    /* hide desktop buttons */
+    .nav-links {
+        display: none;
+    }
+
+    /* show hamburger */
+    .hamburger-btn {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;   /* or fixed if you want it to float */
+        top: 50px;
+        left: 20px;
+
+        z-index: 10000;        /* VERY IMPORTANT */
+
+        display: none;
+        flex-direction: column;
+
+        background: #dfede4;
+        border: 3px solid #341a21;
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .nav-menu.show {
+        display: flex;
+    }
 
     .organize {
         width: 95%;
@@ -673,5 +766,19 @@ a:active {
     }
     .organize {
         width: 100%;
+    }
+
+    .aboutus-info {
+        flex-direction: column;   /* 🔥 stack vertically */
+        align-items: flex-start; /* optional: left align */
+        gap: 15px;
+    }
+
+    .aboutus-info a {
+        width: 100%;             /* makes each item full width */
+    }
+
+    .aboutus-info div {
+        justify-content: flex-start;
     }
 }

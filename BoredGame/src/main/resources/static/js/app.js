@@ -52,6 +52,10 @@ if (userForm) {
     });
 }
 
+function toggleMenu() {
+    document.getElementById("navMenu").classList.toggle("show");
+}
+
 // EVENT FORM
 const eventForm = document.getElementById("eventForm");
 

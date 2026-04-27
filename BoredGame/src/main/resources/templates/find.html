@@ -12,34 +12,59 @@
 <!-- HEADER -->
 <section class="nav-bar">
     <div class="container-fluid">
-        <div class="d-flex align-items-center">
+        <div class="nav-content">
+            <div class="nav-left">
+                <!-- LEFT SIDE -->
+                <div class="logo">
+                    <img th:src="@{/images/logo.png}" alt="bored game logo" height="50">
+                </div>
 
-            <!-- LEFT SIDE -->
-            <div class="logo">
-                <img th:src="@{/images/logo.png}" alt="bored game logo" height="50">
-            </div>
-            <div>
-                <a th:href="@{/find}"><button class="left_btns">Pronađi</button></a>
-                <a th:href="@{/organiziranje}"><button class="left_btns">Organiziraj</button></a>
+                <!-- DESKTOP MENU -->
+                <div class="nav-links">
+                    <a th:href="@{/find}">
+                        <button class="left_btns">Pronađi</button>
+                    </a>
+                    <a th:href="@{/organiziranje}">
+                        <button class="left_btns">Organiziraj</button>
+                    </a>
+                </div>
 
+                <!-- HAMBURGER (mobile only) -->
+                <button class="hamburger-btn" onclick="toggleMenu()" type="button">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <!-- MOBILE MENU -->
+                <div class="nav-menu" id="navMenu">
+                    <a th:href="@{/find}"><button class="left_btns">Pronađi</button></a>
+                    <a th:href="@{/organiziranje}"><button class="left_btns">Organiziraj</button></a>
+                </div>
             </div>
+
 
             <!-- SPACER -->
             <div class="flex-grow-1"></div>
 
-            <!-- RIGHT SIDE: ulogiran -->
-            <div th:if="${loggedIn}">
-                <span class="nav-username" th:text="'Hej, ' + ${username}"></span>
-                <a th:href="@{/logout}" ><button class="login_btn">Log Out</button></a>
-            </div>
-            <!-- RIGHT SIDE: nije ulogiran -->
-            <div th:unless="${loggedIn}">
-                <a th:href="@{/login}" ><button class="login_btn">Log In</button></a>
+            <!-- RIGHT SIDE -->
+            <div class="nav-right">
+                <div th:if="${loggedIn}">
+                    <span class="nav-username" th:text="'Hej, ' + ${username}"></span>
+                    <a th:href="@{/logout}">
+                        <button class="login_btn">Log Out</button>
+                    </a>
+                </div>
+
+                <div th:unless="${loggedIn}">
+                    <a th:href="@{/login}">
+                        <button class="login_btn">Log In</button>
+                    </a>
+                </div>
+
+                <a th:href="@{/aboutus}">
+                    <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
+                </a>
             </div>
 
-            <a th:href="@{/aboutus}">
-                <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
-            </a>
         </div>
     </div>
 </section>
@@ -73,7 +98,8 @@
 
             <!-- Organizator - can't leave their own event -->
             <button th:if="${loggedIn and isOrganizer[event.id]}"
-                    class="join-btn organizer-btn" disabled>Organizator</button>
+                    class="join-btn organizer-btn" disabled>Organizator
+            </button>
 
             <!-- Već joinao i NIJE organizator - can leave -->
             <form th:if="${loggedIn and userJoined[event.id] and !isOrganizer[event.id]}"
@@ -84,7 +110,8 @@
 
             <!-- Event pun i nije joinao -->
             <button th:if="${loggedIn and !userJoined[event.id] and isFull[event.id]}"
-                    class="join-btn" disabled>Puno</button>
+                    class="join-btn" disabled>Puno
+            </button>
 
             <!-- Može joinati -->
             <form th:if="${loggedIn and !userJoined[event.id] and !isFull[event.id]}"
@@ -93,7 +120,7 @@
                 <button class="join-btn" type="submit">Pridruži se</button>
             </form>
 
-        <p th:if="${#lists.isEmpty(events)}" class="no-events">Nema otvorenih događaja.</p>
+            <p th:if="${#lists.isEmpty(events)}" class="no-events">Nema otvorenih događaja.</p>
         </div>
     </aside>
 
@@ -104,6 +131,6 @@
     </div>
 
 </div>
-
+<script th:src="@{/js/app.js}"></script>
 </body>
 </html>
