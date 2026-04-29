@@ -498,10 +498,10 @@ a:active {
     gap: 8px;
     flex-wrap: wrap;
 }
+
 .event-card form {
-    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
 }
 
 .event-card::before {
@@ -546,6 +546,12 @@ a:active {
     color: #71816d;
     font-size: 0.78rem;
     font-weight: bold;
+}
+
+.event-level {
+    color: #71816d;
+    font-size: 0.82rem;
+    font-style: italic;
 }
 
 .join-btn {
