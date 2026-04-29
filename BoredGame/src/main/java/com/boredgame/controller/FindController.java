@@ -48,7 +48,7 @@ public class FindController {
             isOrganizer.put(event.getId(),
                     userId != null &&
                             event.getOrganizator() != null &&
-                            event.getOrganizator().getId() == userId);  // NEW
+                            event.getOrganizator().getId() == userId);
         }
 
         model.addAttribute("events", events);
