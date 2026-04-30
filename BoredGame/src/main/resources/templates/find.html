@@ -87,40 +87,39 @@
             <div class="event-info">
                 <span class="event-cafe" th:text="${event.kafic.name}"></span>
                 <span class="event-game" th:text="${event.nazivIgre}"></span>
+                <span class="event-level"
+                      th:text="'Razina: ' + (${event.level} == '1' ? 'Početnička' :
+                       (${event.level} == '2' ? 'Ležerna' : 'Kompetitivna'))">
+        </span>
                 <span class="event-time" th:text="${#temporals.format(event.datumVrijeme, 'dd.MM.yyyy HH:mm')}"></span>
                 <span class="event-spots"
                       th:text="${currentPlayers[event.id]} + ' / ' + ${event.maxPlayers} + ' igrača'"></span>
             </div>
 
             <!-- Nije ulogiran -->
-            <a th:if="${!loggedIn}"
-               th:href="@{/login}" class="join-btn">Prijavi se</a>
+            <a th:if="${!loggedIn}" th:href="@{/login}" class="join-btn">Prijavi se</a>
 
-            <!-- Organizator - can't leave their own event -->
+            <!-- Organizator -->
             <button th:if="${loggedIn and isOrganizer[event.id]}"
-                    class="join-btn organizer-btn" disabled>Organizator
-            </button>
+                    class="join-btn" disabled>Organizator</button>
 
-            <!-- Već joinao i NIJE organizator - can leave -->
-            <form th:if="${loggedIn and userJoined[event.id] and !isOrganizer[event.id]}"
+            <!-- Pun (i nije organizator i nije joinao) -->
+            <button th:if="${loggedIn and !isOrganizer[event.id] and !userJoined[event.id] and isFull[event.id]}"
+                    class="join-btn" disabled>Puno</button>
+
+            <!-- Joinao, nije organizator - može odustati -->
+            <form th:if="${loggedIn and !isOrganizer[event.id] and userJoined[event.id]}"
                   th:action="@{/leave}" method="post">
                 <input type="hidden" name="eventId" th:value="${event.id}">
-                <button class="join-btn leave-btn" type="submit">Napusti</button>
+                <button class="join-btn leave-btn" type="submit">Odustani</button>
             </form>
 
-            <!-- Event pun i nije joinao -->
-            <button th:if="${loggedIn and !userJoined[event.id] and isFull[event.id]}"
-                    class="join-btn" disabled>Puno
-            </button>
-
             <!-- Može joinati -->
-            <form th:if="${loggedIn and !userJoined[event.id] and !isFull[event.id]}"
+            <form th:if="${loggedIn and !isOrganizer[event.id] and !userJoined[event.id] and !isFull[event.id]}"
                   th:action="@{/join}" method="post">
                 <input type="hidden" name="eventId" th:value="${event.id}">
                 <button class="join-btn" type="submit">Pridruži se</button>
             </form>
-
-            <p th:if="${#lists.isEmpty(events)}" class="no-events">Nema otvorenih događaja.</p>
         </div>
     </aside>
 

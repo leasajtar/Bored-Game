@@ -50,8 +50,8 @@ public class JoinController {
             return "redirect:/find?error=already_joined";
         }
 
-        // 3. Provjeri je li event pun (maxPlayers uključuje organizatora)
-        int currentCount = joiningRepo.countByEventId(eventId) + 1; // +1 za organizatora
+        // 3. Provjeri je li event pun
+        int currentCount = joiningRepo.countByEventId(eventId);
         if (currentCount >= event.getMaxPlayers()) {
             return "redirect:/find?error=full";
         }
