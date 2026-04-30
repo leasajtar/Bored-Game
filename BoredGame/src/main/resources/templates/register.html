@@ -72,7 +72,7 @@
 </section>
 
 <section class="login">
-    <h2>Register:</h2>
+    <h2>Registriraj se:</h2>
 
     <!-- Poruka o grešci ako username već postoji -->
     <p th:if="${param.error == 'exists'}" style="color: red;">Korisničko ime već postoji.</p>
@@ -81,21 +81,21 @@
 
     <div class="login_form">
         <form action="/register" method="post">
-            <input name="username"  placeholder="Username"        required><br>
-            <input name="password"  placeholder="Password"        type="password" required><br>
+            <input name="username"  placeholder="Korisničko ime"        required><br>
+            <input name="password"  placeholder="Lozinka"        type="password" required><br>
             <input name="email"     placeholder="Email"           type="email" required><br>
             <input name="ime"       placeholder="Ime"             required><br>
             <input name="prezime"   placeholder="Prezime"         required><br>
 
             <section class="gender_btns">
-                <label><input type="radio" name="gender" value="0"> Female</label><br>
-                <label><input type="radio" name="gender" value="1"> Male</label><br>
-                <label><input type="radio" name="gender" value="2"> Other</label><br>
+                <label><input type="radio" name="gender" value="0"> Žensko</label><br>
+                <label><input type="radio" name="gender" value="1"> Muško</label><br>
+                <label><input type="radio" name="gender" value="2"> Ostalo</label><br>
             </section>
 
-            <input name="phone" placeholder="Phone (optional)"><br>
+            <input name="phone" placeholder="Br. mobitela (optional)"><br>
 
-            <button class="login_submit_btn" type="submit">Submit</button>
+            <button class="login_submit_btn" type="submit">Registriraj se</button>
         </form>
     </div>
 </section>
