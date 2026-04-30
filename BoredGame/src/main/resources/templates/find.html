@@ -91,12 +91,10 @@
                 <span class="event-game" th:text="${event.nazivIgre}"></span>
                 <span class="event-level"
                       th:text="'Razina: ' + (${event.level} == '1' ? 'Početnička' :
-<<<<<<< HEAD
                        (${event.level} == '2' ? 'Ležerna' : 'Kompetitivna'))">
         </span>
-=======
                (${event.level} == '2' ? 'Ležerna' : 'Kompetitivna'))"> </span>
->>>>>>> ca39709fa0e6ac015d9d244ef500a957c10537bb
+
                 <span class="event-time" th:text="${#temporals.format(event.datumVrijeme, 'dd.MM.yyyy HH:mm')}"></span>
                 <span class="event-spots"
                       th:text="${currentPlayers[event.id]} + ' / ' + ${event.maxPlayers} + ' igrača'"></span>
