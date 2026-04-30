@@ -59,7 +59,7 @@ CREATE TABLE `events` (
   KEY `FKdocju8m76a3f8o6ljh2jrn2ra` (`organizer_id`),
   CONSTRAINT `FKdocju8m76a3f8o6ljh2jrn2ra` FOREIGN KEY (`organizer_id`) REFERENCES `users` (`userID`),
   CONSTRAINT `FKi7wrc3qwbbmupsv60ft6a45oi` FOREIGN KEY (`cafe_id`) REFERENCES `cafes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `events` */
 
@@ -68,7 +68,9 @@ insert  into `events`(`id`,`event_datetime`,`game_name`,`max_players`,`status`,`
 (53,'2026-05-11 19:30:00.000000','Uno',8,'OPEN',22,5,'1'),
 (54,'2026-05-12 17:00:00.000000','Poker',6,'OPEN',21,7,'3'),
 (55,'2026-05-13 20:00:00.000000','Scrabble',4,'OPEN',24,10,'2'),
-(56,'2026-05-14 18:30:00.000000','Exploding Kittens',5,'OPEN',26,12,'1');
+(56,'2026-05-14 18:30:00.000000','Exploding Kittens',5,'OPEN',26,12,'1'),
+(59,'2026-08-19 17:10:00.000000','Scrabble',7,'open',28,12,'1'),
+(60,'2026-06-25 10:00:00.000000','Šah',2,'open',25,12,'1');
 
 /*Table structure for table `joinings` */
 
@@ -83,13 +85,17 @@ CREATE TABLE `joinings` (
   KEY `FKk79q6rmx6etormod7r9oebkij` (`user_id`),
   CONSTRAINT `FKgxlhgukacrhprvyg8vh7d8no` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`),
   CONSTRAINT `FKk79q6rmx6etormod7r9oebkij` FOREIGN KEY (`user_id`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `joinings` */
 
 insert  into `joinings`(`id`,`event_id`,`user_id`) values 
-(3,52,12),
-(4,52,13);
+(5,56,12),
+(8,52,12),
+(9,52,13),
+(10,55,13),
+(11,60,12),
+(12,60,13);
 
 /*Table structure for table `users` */
 
