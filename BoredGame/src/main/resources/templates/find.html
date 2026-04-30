@@ -80,7 +80,6 @@
             Ovaj event je pun!
         </p>
 
-<!--        comment to test-->
 
         <p th:if="${param.error != null and param.error[0] == 'already_joined'}" class="error-msg">
             Već si se priključio ovom eventu!
@@ -93,7 +92,6 @@
                       th:text="'Razina: ' + (${event.level} == '1' ? 'Početnička' :
                        (${event.level} == '2' ? 'Ležerna' : 'Kompetitivna'))">
         </span>
-               (${event.level} == '2' ? 'Ležerna' : 'Kompetitivna'))"> </span>
 
                 <span class="event-time" th:text="${#temporals.format(event.datumVrijeme, 'dd.MM.yyyy HH:mm')}"></span>
                 <span class="event-spots"
