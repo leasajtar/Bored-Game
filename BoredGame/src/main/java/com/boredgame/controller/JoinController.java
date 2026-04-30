@@ -29,10 +29,10 @@ public class JoinController {
     @PostMapping("/join")
     public String join(@RequestParam Integer eventId, HttpSession session) {
 
-        // 1. Provjeri je li korisnik ulogiran
+        // login provjera
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId == null) {
-            return "redirect:/login"; // nije ulogiran, šalji na login
+            return "redirect:/login";
         }
 
         Optional<Event> eventOpt = eventRepo.findById(eventId);
@@ -45,18 +45,18 @@ public class JoinController {
         Event event = eventOpt.get();
         User user = userOpt.get();
 
-        // 2. Provjeri je li već joinao
+        // join provjera
         if (joiningRepo.existsByEventIdAndUserId(eventId, userId)) {
             return "redirect:/find?error=already_joined";
         }
 
-        // 3. Provjeri je li event pun
+        // punost eventa
         int currentCount = joiningRepo.countByEventId(eventId);
         if (currentCount >= event.getMaxPlayers()) {
             return "redirect:/find?error=full";
         }
 
-        // 4. Sve ok - spremi joining
+        // join spremanje
         Joining joining = new Joining();
         joining.setEvent(event);
         joining.setUser(user);
@@ -72,7 +72,7 @@ public class JoinController {
             return "redirect:/login";
         }
 
-        // Can't leave an event you organised
+        // Onemogućavanje napuštanja eventa koji si organizirao
         Optional<Event> eventOpt = eventRepo.findById(eventId);
         if (eventOpt.isEmpty()) {
             return "redirect:/find";
@@ -82,7 +82,6 @@ public class JoinController {
             return "redirect:/find?error=cant_leave_own_event";
         }
 
-        // Delete the joining record
         joiningRepo.deleteByEventIdAndUserId(eventId, userId);
 
         return "redirect:/find";

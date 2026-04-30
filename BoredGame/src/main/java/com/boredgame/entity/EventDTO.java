@@ -2,14 +2,14 @@ package com.boredgame.entity;
 
 public class EventDTO {
     private Integer id;
-    private String game_name;           // "Catan"
-    private String cafe_name;          // "Kafić Botun"
-    private String event_datetime;        // formatirano: "Subota, 26.4. u 18:00"
-    private Integer max_players;          // 4
-    private Integer currentPlayers;     // koliko se već priključilo + organizator
-    private Integer freeSpaces;     // maxIgraca - trenutnoIgraca
-    private boolean userAccepted; // je li ovaj user već kliknuo "Pridruži se"
-    private boolean isOrganizer;// je li ovaj uje Organizatorser organizator
+    private String game_name;
+    private String cafe_name;
+    private String event_datetime;
+    private Integer max_players;
+    private Integer currentPlayers;
+    private Integer freeSpaces;
+    private boolean userAccepted;
+    private boolean isOrganizer;
 
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}

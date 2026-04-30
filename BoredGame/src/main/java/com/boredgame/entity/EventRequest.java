@@ -2,8 +2,6 @@ package com.boredgame.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.time.LocalDateTime;
-
 public class EventRequest {
     private String game_name;
     private Integer max_players;

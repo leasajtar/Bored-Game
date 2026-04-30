@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "cafes")
 public class Cafe {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;

@@ -1,4 +1,4 @@
-/* ===================== SHARED (USED IN MULTIPLE HTML FILES) ===================== */
+/* ===================== SHARED ===================== */
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -23,12 +23,10 @@ a:active {
     width: 100%;
 }
 
-/* DESKTOP MENU */
 .nav-links {
     display: flex;
 }
 
-/* HAMBURGER (hidden by default) */
 .hamburger-btn {
     display: none;
     padding: 10px;
@@ -41,7 +39,6 @@ a:active {
     cursor: pointer;
 }
 
-/* MOBILE DROPDOWN */
 .nav-menu {
     display: none;
     position: absolute;
@@ -69,7 +66,7 @@ a:active {
     display: flex;
     align-items: center;
 }
-/* RIGHT SIDE */
+
 .nav-right {
     display: flex;
     align-items: center;
@@ -672,7 +669,7 @@ a:active {
 }
 @media (max-width: 900px) {
     .organize-content {
-        flex-direction: column; /* 🔥 stack umjesto side-by-side */
+        flex-direction: column;
         align-items: center;
     }
 
@@ -683,7 +680,7 @@ a:active {
     }
 
     .right-panel {
-        max-height: none; /* da lista ne bude stisnuta */
+        max-height: none;
     }
 
     .scroll-list {
@@ -692,22 +689,20 @@ a:active {
 }
 @media (max-width: 728px) {
 
-    /* hide desktop buttons */
     .nav-links {
         display: none;
     }
 
-    /* show hamburger */
     .hamburger-btn {
         display: block;
     }
 
     .nav-menu {
-        position: fixed;   /* or fixed if you want it to float */
+        position: fixed;
         top: 50px;
         left: 20px;
 
-        z-index: 10000;        /* VERY IMPORTANT */
+        z-index: 10000;
 
         display: none;
         flex-direction: column;
@@ -738,7 +733,7 @@ a:active {
     }
 
     .levels-group {
-        flex-wrap: wrap; /* da buttoni ne izlaze */
+        flex-wrap: wrap;
         justify-content: center;
     }
 
@@ -785,13 +780,13 @@ a:active {
     }
 
     .aboutus-info {
-        flex-direction: column;   /* 🔥 stack vertically */
-        align-items: flex-start; /* optional: left align */
+        flex-direction: column;
+        align-items: flex-start;
         gap: 15px;
     }
 
     .aboutus-info a {
-        width: 100%;             /* makes each item full width */
+        width: 100%;
     }
 
     .aboutus-info div {

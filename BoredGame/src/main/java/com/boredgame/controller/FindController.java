@@ -31,10 +31,10 @@ public class FindController {
         Map<Integer, Integer> currentPlayers = new HashMap<>();
         Map<Integer, Boolean> userJoined = new HashMap<>();
         Map<Integer, Boolean> isFull = new HashMap<>();
-        Map<Integer, Boolean> isOrganizer = new HashMap<>();  // NEW
+        Map<Integer, Boolean> isOrganizer = new HashMap<>();
 
         for (Event event : events) {
-            int joined = joiningRepo.countByEventId(event.getId()); // no more +1, organizer is in joinings now
+            int joined = joiningRepo.countByEventId(event.getId());
             currentPlayers.put(event.getId(), joined);
 
             Integer maxPlayers = event.getMaxPlayers();
@@ -44,7 +44,7 @@ public class FindController {
             userJoined.put(event.getId(),
                     userId != null && joiningRepo.existsByEventIdAndUserId(event.getId(), userId));
 
-            // Check if this user is the organizer of this event
+            // organizer provjera
             isOrganizer.put(event.getId(),
                     userId != null &&
                             event.getOrganizator() != null &&

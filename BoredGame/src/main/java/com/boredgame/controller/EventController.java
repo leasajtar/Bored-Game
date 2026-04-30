@@ -96,9 +96,9 @@ public class EventController {
         event.setEventDatetime(parsedDatetime);
         event.setStatus("open");
 
-        Event savedEvent = eventRepository.save(event); // capture saved event with its new ID
+        Event savedEvent = eventRepository.save(event);
 
-        // Auto-join the organizer into the joinings table
+        // Auto-join organizer
         Joining organizerJoining = new Joining();
         organizerJoining.setEvent(savedEvent);
         organizerJoining.setUser(userOpt.get());

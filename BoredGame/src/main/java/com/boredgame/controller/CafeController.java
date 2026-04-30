@@ -19,10 +19,10 @@ public class CafeController {
     }
 
     @GetMapping("/organiziranje")
-    public String showPage(Model model, HttpSession session) {  // add HttpSession here
+    public String showPage(Model model, HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId");
 
-        // Not logged in → redirect to login
+        // login redirect
         if (userId == null) {
             return "redirect:/login";
         }

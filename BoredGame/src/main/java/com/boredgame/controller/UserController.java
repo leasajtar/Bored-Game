@@ -15,7 +15,7 @@ public class UserController {
         this.usersRepos = usersRepos;
     }
 
-    // ---- REGISTRACIJA ----
+    // REGISTRACIJA
 
     @GetMapping("/register")
     public String registerPage() {
@@ -48,7 +48,7 @@ public class UserController {
         return "redirect:/login?success";
     }
 
-    // ---- LOGIN ----
+    // LOGIN
 
     @GetMapping("/login")
     public String loginPage() {
@@ -71,7 +71,7 @@ public class UserController {
         }
     }
 
-    // ---- LOGOUT ----
+    // LOGOUT
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

@@ -7,14 +7,11 @@ import java.util.List;
 
 @Service
 public class EventService {
-
     private final EventRepo eventRepo;
 
     public EventService(EventRepo eventRepo) {
         this.eventRepo = eventRepo;
     }
-
-    // Vraća samo OPEN evente
     public List<Event> getOpenEvents() {
         return eventRepo.findByStatus("OPEN");
     }

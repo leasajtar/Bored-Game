@@ -1,6 +1,6 @@
 console.log("app.js loaded");
 
-// GAME SELECT FUNCTION - must be global
+// GAME SELECT FUNCTION
 function pickGame(gameName, element) {
     const gameInput = document.getElementById("game_name");
 
