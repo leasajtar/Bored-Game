@@ -36,8 +36,8 @@ body {
     font-family: var(--font-body);
     background-color: var(--bg);
     background-image:
-        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(181,119,42,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 90%, rgba(181,119,42,0.05) 0%, transparent 50%);
+            radial-gradient(ellipse 80% 50% at 20% 10%, rgba(181,119,42,0.07) 0%, transparent 60%),
+            radial-gradient(ellipse 60% 40% at 80% 90%, rgba(181,119,42,0.05) 0%, transparent 50%);
     background-attachment: fixed;
     color: var(--text);
     min-height: 100vh;
@@ -398,6 +398,85 @@ a, a:link, a:visited, a:hover, a:active { text-decoration: none; color: inherit;
     color: var(--danger);
     font-size: 0.85rem;
     margin-bottom: 14px;
+}
+
+.filter-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.filter-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+}
+
+.filter-input:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(181,119,42,0.12);
+}
+
+.filter-open-btn {
+    margin-bottom: 16px;
+}
+
+.filter-popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(42, 31, 15, 0.45);
+    z-index: 20000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.filter-popup.show {
+    display: flex;
+}
+
+.filter-popup-content {
+    width: 100%;
+    max-width: 360px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 20px;
+}
+
+.filter-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.filter-popup-header h4 {
+    margin: 0;
+    font-family: var(--font-display);
+    color: var(--text);
+}
+
+.filter-close-btn {
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.filter-close-btn:hover {
+    color: var(--accent);
 }
 
 /* ===================== ORGANIZE PAGE ===================== */

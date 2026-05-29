@@ -56,6 +56,89 @@ function toggleMenu() {
     document.getElementById("navMenu").classList.toggle("show");
 }
 
+// FILTERS FOR FIND PAGE
+
+function filterEvents() {
+    console.log("Primijeni filtere clicked");
+
+    const filterCafe = document.getElementById("filterCafe");
+    const filterLevel = document.getElementById("filterLevel");
+    const filterGame = document.getElementById("filterGame");
+    const filterDate = document.getElementById("filterDate");
+
+    const cafeValue = filterCafe ? filterCafe.value : "";
+    const levelValue = filterLevel ? filterLevel.value : "";
+    const gameValue = filterGame ? filterGame.value : "";
+    const dateValue = filterDate ? filterDate.value : "";
+
+    const cards = document.querySelectorAll(".event-card");
+
+    cards.forEach(card => {
+        const cardCafe = card.getAttribute("data-cafe-id");
+        const cardLevel = card.getAttribute("data-level");
+        const cardGame = card.getAttribute("data-game");
+        const cardDate = card.getAttribute("data-date");
+
+        const matchesCafe = cafeValue === "" || cardCafe === cafeValue;
+        const matchesLevel = levelValue === "" || cardLevel === levelValue;
+        const matchesGame = gameValue === "" || cardGame === gameValue;
+        const matchesDate = dateValue === "" || cardDate === dateValue;
+
+        if (matchesCafe && matchesLevel && matchesGame && matchesDate) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+function openFilterPopup() {
+    const popup = document.getElementById("filterPopup");
+    if (popup) {
+        popup.classList.add("show");
+    }
+}
+
+function closeFilterPopup() {
+    const popup = document.getElementById("filterPopup");
+    if (popup) {
+        popup.classList.remove("show");
+    }
+}
+
+// close popup if user clicks outside the box
+document.addEventListener("click", function (e) {
+    const popup = document.getElementById("filterPopup");
+    const content = document.querySelector(".filter-popup-content");
+    const openBtn = document.querySelector(".filter-open-btn");
+
+    if (!popup || !popup.classList.contains("show")) return;
+
+    if (
+        content &&
+        !content.contains(e.target) &&
+        openBtn &&
+        !openBtn.contains(e.target)
+    ) {
+        closeFilterPopup();
+    }
+});
+
+function clearFilters() {
+    const filterCafe = document.getElementById("filterCafe");
+    const filterLevel = document.getElementById("filterLevel");
+    const filterGame = document.getElementById("filterGame");
+    const filterDate = document.getElementById("filterDate");
+
+    if (filterCafe) filterCafe.value = "";
+    if (filterLevel) filterLevel.value = "";
+    if (filterGame) filterGame.value = "";
+    if (filterDate) filterDate.value = "";
+
+    document.querySelectorAll(".event-card").forEach(card => {
+        card.style.display = "flex";
+    });
+}
 // EVENT FORM
 const eventForm = document.getElementById("eventForm");
 
@@ -101,5 +184,8 @@ if (eventForm) {
         } else {
             alert("Greška: " + text);
         }
+
     });
+
+
 }

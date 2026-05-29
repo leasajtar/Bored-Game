@@ -23,6 +23,18 @@ public class FindController {
         this.joiningRepo = joiningRepo;
     }
 
+    private String getGameType(String gameName) {
+        if (gameName == null) return "Ostalo";
+
+        return switch (gameName) {
+            case "Alias", "Scrabble" -> "Riječi";
+            case "Uno", "Briškule", "Poker", "Exploding Kittens" -> "Karte";
+            case "Catan", "Risk", "Monopoly", "Šah" -> "Strategije";
+            case "Vukodlak" -> "Dedukcija";
+            default -> "Ostalo";
+        };
+    }
+
     @GetMapping("/find")
     public String findPage(Model model, HttpSession session) {
         List<Event> events = eventService.getOpenEvents();
@@ -32,6 +44,7 @@ public class FindController {
         Map<Integer, Boolean> userJoined = new HashMap<>();
         Map<Integer, Boolean> isFull = new HashMap<>();
         Map<Integer, Boolean> isOrganizer = new HashMap<>();
+        Map<Integer, String> gameTypes = new HashMap<>();
 
         for (Event event : events) {
             int joined = joiningRepo.countByEventId(event.getId());
@@ -41,16 +54,19 @@ public class FindController {
             if (maxPlayers == null) maxPlayers = 4;
 
             isFull.put(event.getId(), joined >= maxPlayers);
+
             userJoined.put(event.getId(),
                     userId != null && joiningRepo.existsByEventIdAndUserId(event.getId(), userId));
 
-            // organizer provjera
             isOrganizer.put(event.getId(),
                     userId != null &&
                             event.getOrganizator() != null &&
                             event.getOrganizator().getId() == userId);
+
+            gameTypes.put(event.getId(), getGameType(event.getNazivIgre()));
         }
 
+        model.addAttribute("gameTypes", gameTypes);
         model.addAttribute("events", events);
         model.addAttribute("currentPlayers", currentPlayers);
         model.addAttribute("userJoined", userJoined);
