@@ -1,92 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Log In</title>
+    <title>Log In — Bored Game</title>
     <link rel="icon" type="image/x-icon" href="/images/logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://kit.fontawesome.com/34542901a1.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-
 <!-- HEADER -->
 <section class="nav-bar">
     <div class="container-fluid">
         <div class="nav-content">
             <div class="nav-left">
-                <!-- LEFT SIDE -->
                 <div class="logo">
-                    <img th:src="@{/images/bored-game-text.png}" alt="bored game logo" height="50">
+                    <img th:src="@{/images/bored-game-text.png}" alt="bored game logo" height="42">
                 </div>
-
-                <!-- DESKTOP MENU -->
                 <div class="nav-links">
-                    <a th:href="@{/find}">
-                        <button class="left_btns">Pronađi</button>
-                    </a>
-                    <a th:href="@{/organiziranje}">
-                        <button class="left_btns">Organiziraj</button>
-                    </a>
+                    <a th:href="@{/find}"><button class="left_btns">Pronađi</button></a>
+                    <a th:href="@{/organiziranje}"><button class="left_btns">Organiziraj</button></a>
                 </div>
-
-                <!-- HAMBURGER -->
                 <button class="hamburger-btn" onclick="toggleMenu()" type="button">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-
-                <!-- MOBILE MENU -->
                 <div class="nav-menu" id="navMenu">
                     <a th:href="@{/find}"><button class="left_btns">Pronađi</button></a>
                     <a th:href="@{/organiziranje}"><button class="left_btns">Organiziraj</button></a>
                 </div>
             </div>
-
-
-            <!-- SPACER -->
             <div class="flex-grow-1"></div>
-
-            <!-- RIGHT SIDE -->
             <div class="nav-right">
                 <div th:if="${loggedIn}">
                     <span class="nav-username" th:text="'Hej, ' + ${username}"></span>
-                    <a th:href="@{/logout}">
-                        <button class="login_btn">Log Out</button>
-                    </a>
+                    <a th:href="@{/logout}"><button class="login_btn">Log Out</button></a>
                 </div>
-
                 <div th:unless="${loggedIn}">
-                    <a th:href="@{/login}">
-                        <button class="login_btn">Log In</button>
-                    </a>
+                    <a th:href="@{/login}"><button class="login_btn">Log In</button></a>
                 </div>
-
-                <a th:href="@{/aboutus}">
-                    <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
-                </a>
+                <a th:href="@{/aboutus}"><button class="info_btn"><i class="fa-regular fa-circle-question"></i></button></a>
             </div>
-
         </div>
     </div>
 </section>
 
 <section class="login">
-    <h2>Log In:</h2>
-
+    <h2>Dobrodošli natrag</h2>
     <p th:if="${param.error}" style="color: red;">Krivo korisničko ime ili lozinka.</p>
-
     <div class="login_form">
         <form action="/login" method="post">
-            <input name="username" placeholder="Korisničko ime" required><br>
-            <input name="password" placeholder="Lozinka" type="password" required><br>
+            <input name="username" placeholder="Korisničko ime" required>
+            <input name="password" placeholder="Lozinka" type="password" required>
             <button class="login_submit_btn" type="submit">Prijavi se</button>
         </form>
     </div>
-
-    <p style="margin-top: 12px;">Nemaš račun? <a th:href="@{/register}">Registriraj se!</a></p>
+    <p>Nemaš račun? <a th:href="@{/register}">Registriraj se!</a></p>
 </section>
 
+<script th:src="@{/js/app.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
