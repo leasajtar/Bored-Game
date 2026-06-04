@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Log In</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<section class="login">
+
+    <h2>Admin prijava</h2>
+
+    <p th:if="${param.error}" style="color:red;">
+        Pogrešan ID ili lozinka.
+    </p>
+
+    <div class="login_form">
+        <form action="/admin/login" method="post">
+
+            <input
+                    type="number"
+                    name="id"
+                    placeholder="Admin ID"
+                    required>
+
+            <input
+                    type="password"
+                    name="password"
+                    placeholder="Lozinka"
+                    required>
+
+            <button
+                    class="login_submit_btn"
+                    type="submit">
+                Prijavi se
+            </button>
+
+        </form>
+    </div>
+
+    <p style="margin-top: 15px;">
+        <a th:href="@{/login}">
+            Povratak na korisničku prijavu
+        </a>
+    </p>
+
+</section>
+
+</body>
+</html>

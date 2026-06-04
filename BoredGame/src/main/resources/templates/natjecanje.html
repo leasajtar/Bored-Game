@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Napravi natjecanje</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="form-wrapper">
+
+    <section class="admin_make">
+        <form class="organize"
+              th:action="@{/admin/natjecanje}"
+              method="post">
+
+            <div class="organize-content">
+
+                <div class="left-panel">
+
+                    <div class="label-event">
+                        <label>Napravi natjecanje:</label>
+                    </div>
+
+                    <input type="hidden" id="game_type" name="game_type">
+
+                    <div class="date-time-row">
+                        <label for="date" class="form-label">Datum:</label>
+                        <input
+                                type="date"
+                                id="date"
+                                name="date"
+                                class="form-control"
+                                required>
+                    </div>
+
+                    <div class="date-time-row">
+                        <label for="time" class="form-label">Vrijeme:</label>
+                        <input
+                                type="time"
+                                id="time"
+                                name="time"
+                                class="form-control"
+                                required>
+                    </div>
+
+                    <select name="cafe_id" class="cafe form-control" required>
+                        <option value="">Odaberi kafić</option>
+
+                        <option th:each="cafe : ${cafes}"
+                                th:value="${cafe.id}"
+                                th:text="${cafe.name}">
+                        </option>
+                    </select>
+
+                    <div class="players-row">
+                        <label for="entry_fee" class="form-label">Cijena ulaza:</label>
+
+                        <div class="players">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    id="entry_fee"
+                                    name="entry_fee"
+                                    min="0"
+                                    step="0.01"
+                                    value="0"
+                                    required>
+                        </div>
+                    </div>
+
+                    <div class="players-row">
+                        <label for="max_players" class="form-label">Max igrača:</label>
+
+                        <div class="players">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    id="max_players"
+                                    name="max_players"
+                                    min="1"
+                                    value="4"
+                                    required>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="right-panel">
+                    <div class="container mt-4">
+                        <div class="scroll-list">
+
+                            <div class="list-item" onclick="pickCompetitionGame('Alias', this)">
+                                <img th:src="@{/images/alias-logo.png}" alt="game">
+                                <div class="item-info">
+                                    <h5>Alias</h5>
+                                    <p>Tip: Riječi</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Briškule', this)">
+                                <img th:src="@{/images/briškule.jpg}" alt="game">
+                                <div class="item-info">
+                                    <h5>Briškule</h5>
+                                    <p>Tip: Karte</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Catan', this)">
+                                <img th:src="@{/images/Catan.jpg}" alt="game">
+                                <div class="item-info">
+                                    <h5>Catan</h5>
+                                    <p>Tip: Strategije</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Exploding Kittens', this)">
+                                <img th:src="@{/images/Exploding_Kittens.png}" alt="game">
+                                <div class="item-info">
+                                    <h5>Exploding Kittens</h5>
+                                    <p>Tip: Karte</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Monopoly', this)">
+                                <img th:src="@{/images/monopoly.png}" alt="game">
+                                <div class="item-info">
+                                    <h5>Monopoly</h5>
+                                    <p>Tip: Strategije</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Poker', this)">
+                                <img th:src="@{/images/poker.jpg}" alt="game">
+                                <div class="item-info">
+                                    <h5>Poker</h5>
+                                    <p>Tip: Karte</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Risk', this)">
+                                <img th:src="@{/images/risk.jpg}" alt="game">
+                                <div class="item-info">
+                                    <h5>Risk</h5>
+                                    <p>Tip: Strategije</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Scrabble', this)">
+                                <img th:src="@{/images/scrabble.png}" alt="game">
+                                <div class="item-info">
+                                    <h5>Scrabble</h5>
+                                    <p>Tip: Riječi</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Uno', this)">
+                                <img th:src="@{/images/uno.png}" alt="game">
+                                <div class="item-info">
+                                    <h5>Uno</h5>
+                                    <p>Tip: Karte</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Vukodlak', this)">
+                                <img th:src="@{/images/wolf.jpg}" alt="game">
+                                <div class="item-info">
+                                    <h5>Vukodlak</h5>
+                                    <p>Tip: Dedukcija</p>
+                                </div>
+                            </div>
+
+                            <div class="list-item" onclick="pickCompetitionGame('Šah', this)">
+                                <img th:src="@{/images/chess.png}" alt="game">
+                                <div class="item-info">
+                                    <h5>Šah</h5>
+                                    <p>Tip: Strategije</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="submit-wrapper">
+                <button class="login_submit_btn" type="submit">
+                    Spremi natjecanje
+                </button>
+            </div>
+
+        </form>
+
+        <a th:href="@{/admin/dashboard}">
+            <button class="login_submit_btn">Natrag</button>
+        </a>
+    </section>
+
+</div>
+
+<script th:src="@{/js/app.js}"></script>
+
+</body>
+</html>

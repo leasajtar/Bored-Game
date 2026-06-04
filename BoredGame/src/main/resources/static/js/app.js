@@ -189,3 +189,68 @@ if (eventForm) {
 
 
 }
+
+function pickCompetitionGame(gameName, element) {
+    const gameInput = document.getElementById("game_type");
+
+    if (!gameInput) {
+        console.error("Hidden input #game_type not found");
+        return;
+    }
+
+    gameInput.value = gameName;
+
+    document.querySelectorAll(".list-item").forEach(item => {
+        item.classList.remove("selected-game");
+    });
+
+    element.classList.add("selected-game");
+
+    console.log("Selected competition game:", gameName);
+
+    let formToDelete = null;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".delete-open-btn");
+        const popup = document.getElementById("deletePopup");
+        const confirmBtn = document.getElementById("confirmDeleteBtn");
+        const cancelBtn = document.getElementById("cancelDeleteBtn");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                formToDelete = this.closest("form");
+
+                if (popup) {
+                    popup.classList.add("show");
+                }
+            });
+        });
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener("click", function () {
+                formToDelete = null;
+
+                if (popup) {
+                    popup.classList.remove("show");
+                }
+            });
+        }
+
+        if (confirmBtn) {
+            confirmBtn.addEventListener("click", function () {
+                if (formToDelete) {
+                    formToDelete.submit();
+                }
+            });
+        }
+
+        if (popup) {
+            popup.addEventListener("click", function (e) {
+                if (e.target === popup) {
+                    formToDelete = null;
+                    popup.classList.remove("show");
+                }
+            });
+        }
+    });
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<section class="login">
+
+    <h2>Admin Dashboard</h2>
+
+    <p>
+        Dobrodošao,
+        <strong th:text="${adminName}"></strong>
+    </p>
+
+    <br>
+
+    <a th:href="@{/admin/natjecanje}">
+        <button class="login_submit_btn">
+            Napravi Natjecanje
+        </button>
+    </a>
+
+    <br>
+
+    <a th:href="@{/admin/kviz}">
+        <button class="login_submit_btn">
+            Napravi Kviz
+        </button>
+    </a>
+
+    <br>
+
+    <a th:href="@{/admin/obrisi}">
+        <button class="login_submit_btn">
+            Obriši Natjecanje/Kviz
+        </button>
+    </a>
+
+    <br>
+
+    <a th:href="@{/admin/logout}">
+        <button class="login_submit_btn">
+            Odjava
+        </button>
+    </a>
+
+</section>
+
+</body>
+</html>

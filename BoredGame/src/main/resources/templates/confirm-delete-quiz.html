@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Potvrda brisanja</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="form-wrapper">
+
+<section class="admin_make">
+
+    <h2>Potvrda brisanja kviza</h2>
+
+    <p>
+        Stvarno želite obrisati kviz:
+    </p>
+
+    <h3 th:text="${quiz.description}"></h3>
+
+    <p>
+        Datum:
+        <span th:text="${quiz.date}"></span>
+    </p>
+
+    <form th:action="@{/admin/obrisi/kviz/{id}(id=${quiz.id})}"
+          method="post">
+
+        <button class="join-btn leave-btn" type="submit">
+            Trajno obriši
+        </button>
+
+    </form>
+
+    <br>
+
+    <a th:href="@{/admin/obrisi}">
+        <button class="join-btn">
+            Odustani
+        </button>
+    </a>
+
+</section>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Obriši natjecanje ili kviz</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="form-wrapper">
+    <section class="admin_make organize">
+
+        <h2 class="label-event">Obriši natjecanje ili kviz</h2>
+
+        <p th:if="${param.error}" class="error-msg">
+            Brisanje nije potvrđeno.
+        </p>
+
+        <p th:if="${param.success}" style="color: green;">
+            Uspješno obrisano.
+        </p>
+
+        <section class="event-section">
+            <h2>Natjecanja</h2>
+
+            <div class="center-card-grid">
+                <div class="big-event-card" th:each="competition : ${competitions}">
+                    <span class="event-tag">Natjecanje</span>
+
+                    <h3 th:text="${competition.gameType}"></h3>
+
+                    <p>
+                        <strong>Kafić:</strong>
+                        <span th:text="${competition.cafe.name}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Datum:</strong>
+                        <span th:text="${#temporals.format(competition.date, 'dd.MM.yyyy')}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Vrijeme:</strong>
+                        <span th:text="${#temporals.format(competition.time, 'HH:mm')}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Ulaznica:</strong>
+                        <span th:text="${competition.entryFee + ' €'}"></span>
+                    </p>
+
+                    <a th:href="@{/admin/obrisi/natjecanje/{id}(id=${competition.id})}">
+                        <button class="join-btn leave-btn" type="button">
+                            Obriši natjecanje
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="event-section">
+            <h2>Kvizovi</h2>
+
+            <div class="center-card-grid">
+                <div class="big-event-card quiz-card" th:each="quiz : ${quizzes}">
+                    <span class="event-tag">Kviz</span>
+
+                    <h3 th:text="${quiz.description}"></h3>
+
+                    <p>
+                        <strong>Kafić:</strong>
+                        <span th:text="${quiz.cafe.name}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Datum:</strong>
+                        <span th:text="${#temporals.format(quiz.date, 'dd.MM.yyyy')}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Vrijeme:</strong>
+                        <span th:text="${#temporals.format(quiz.time, 'HH:mm')}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Ulaznica:</strong>
+                        <span th:text="${quiz.entryFee + ' €'}"></span>
+                    </p>
+
+                    <a th:href="@{/admin/obrisi/kviz/{id}(id=${quiz.id})}">
+                        <button class="join-btn leave-btn" type="button">
+                            Obriši kviz
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <a th:href="@{/admin/dashboard}">
+            <button class="login_submit_btn">Natrag</button>
+        </a>
+
+    </section>
+</div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>

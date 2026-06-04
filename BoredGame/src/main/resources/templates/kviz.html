@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Napravi kviz</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="form-wrapper">
+
+    <section class="admin_make">
+
+        <form class="organize"
+              th:action="@{/admin/kviz}"
+              method="post">
+
+            <div class="organize-content">
+
+                <div class="left-panel">
+
+                    <div class="label-event">
+                        <label>Napravi kviz:</label>
+                    </div>
+
+                    <div class="date-time-row">
+                        <label for="description" class="form-label">Opis kviza:</label>
+                        <input
+                                type="text"
+                                id="description"
+                                name="description"
+                                class="form-control"
+                                placeholder="npr. Večer općeg znanja"
+                                required>
+                    </div>
+
+                    <div class="date-time-row">
+                        <label for="date" class="form-label">Datum:</label>
+                        <input
+                                type="date"
+                                id="date"
+                                name="date"
+                                class="form-control"
+                                required>
+                    </div>
+
+                    <div class="date-time-row">
+                        <label for="time" class="form-label">Vrijeme:</label>
+                        <input
+                                type="time"
+                                id="time"
+                                name="time"
+                                class="form-control"
+                                required>
+                    </div>
+
+                    <select name="cafe_id" class="cafe form-control" required>
+                        <option value="">Odaberi kafić</option>
+
+                        <option th:each="cafe : ${cafes}"
+                                th:value="${cafe.id}"
+                                th:text="${cafe.name}">
+                        </option>
+                    </select>
+
+                    <div class="players-row">
+                        <label for="entry_fee" class="form-label">Cijena ulaza:</label>
+
+                        <div class="players">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    id="entry_fee"
+                                    name="entry_fee"
+                                    min="0"
+                                    step="0.01"
+                                    value="0"
+                                    required>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="submit-wrapper">
+                <button class="login_submit_btn" type="submit">
+                    Spremi kviz
+                </button>
+            </div>
+
+        </form>
+
+        <a th:href="@{/admin/dashboard}">
+            <button class="login_submit_btn">Natrag</button>
+        </a>
+
+    </section>
+
+</div>
+
+</body>
+</html>
