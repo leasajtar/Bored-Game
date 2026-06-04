@@ -23,6 +23,10 @@ public class User {
     private String prezime;
     @Column(name="gender")
     private int gender;
+    @Column(name="bio", length=300)
+    private String bio;
+    @Column(name="profile_picture")
+    private String profilePicture;
 
     public User(){}
     public User(UserBuilder builder) {
@@ -112,6 +116,11 @@ public class User {
     public void setGender(int gender) {
         this.gender = gender;
     }
+
+    public String getBio() { return bio; }
+    public void setBio(String bio) { this.bio = bio; }
+    public String getProfilePicture() { return profilePicture; }
+    public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }
 
     public static class UserBuilder {
         final int id;

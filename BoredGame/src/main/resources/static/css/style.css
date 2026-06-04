@@ -808,3 +808,392 @@ a, a:link, a:visited, a:hover, a:active { text-decoration: none; color: inherit;
 
     .info-tooltip-text { width: 260px; left: 0; transform: none; }
 }
+/* ===================== PRIJAVLJENI IGRAČI ===================== */
+
+.event-players {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--border-light);
+}
+
+.event-players-label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.event-players-list {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* ===================== GUMB ZA BRISANJE EVENTA ===================== */
+
+.delete-btn {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.delete-btn:hover:not(:disabled) {
+    background: var(--danger);
+    color: white;
+    box-shadow: 0 2px 10px rgba(192,57,43,0.25);
+}
+
+/* ===================== PROFIL GUMB U NAVBARU ===================== */
+
+.profile_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    padding: 0;
+}
+
+.profile_btn:hover,
+.profile_btn.active-page {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-glow);
+}
+
+/* ===================== CUSTOM CONFIRM MODAL ===================== */
+
+.confirm-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(3px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-modal-overlay.show {
+    display: flex;
+}
+
+.confirm-modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 2rem 2rem 1.6rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    animation: modalIn 0.18s ease;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(-16px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.confirm-modal-icon {
+    font-size: 2.2rem;
+    color: var(--danger);
+    margin-bottom: 0.9rem;
+}
+
+.confirm-modal-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--text);
+    margin-bottom: 0.55rem;
+}
+
+.confirm-modal-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.6rem;
+    line-height: 1.5;
+}
+
+.confirm-modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.confirm-modal-btn {
+    padding: 0.5rem 1.4rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+
+.confirm-modal-cancel {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text-muted);
+}
+
+.confirm-modal-cancel:hover {
+    background: var(--surface2);
+    border-color: var(--border);
+    color: var(--text);
+}
+
+.confirm-modal-confirm {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
+.confirm-modal-confirm:hover {
+    background: #a93226;
+    border-color: #a93226;
+}
+
+/* ===================== PROFIL STRANICA ===================== */
+
+.profile-wrapper {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 1.5rem 4rem;
+    background: var(--bg);
+}
+
+.profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 2.5rem 2rem 2rem;
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+/* Avatar */
+.profile-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.profile-avatar-wrap {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    transition: border-color 0.2s;
+}
+
+.profile-avatar-wrap:hover {
+    border-color: var(--accent);
+}
+
+.profile-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--text-dim);
+}
+
+.profile-avatar-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.profile-avatar-wrap:hover .profile-avatar-overlay {
+    opacity: 1;
+}
+
+.profile-avatar-hint {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin: 0;
+}
+
+/* Username badge */
+.profile-username-display {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.01em;
+}
+
+/* Alert poruke */
+.profile-alert {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-alert-success {
+    background: rgba(39, 174, 96, 0.12);
+    border: 1px solid rgba(39, 174, 96, 0.35);
+    color: #1e8449;
+}
+
+.profile-alert-error {
+    background: rgba(192, 57, 43, 0.1);
+    border: 1px solid rgba(192, 57, 43, 0.3);
+    color: var(--danger);
+}
+
+/* Bio form */
+.profile-bio-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.profile-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    position: relative;
+}
+
+.profile-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.profile-bio-input {
+    width: 100%;
+    min-height: 110px;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface2);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+}
+
+.profile-bio-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.profile-bio-input::placeholder {
+    color: var(--text-dim);
+}
+
+.profile-bio-count {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-align: right;
+    margin-top: -0.2rem;
+}
+
+.profile-save-btn {
+    padding: 0.65rem 1.4rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background 0.2s, box-shadow 0.2s;
+    align-self: flex-end;
+}
+
+.profile-save-btn:hover {
+    background: var(--accent-dim);
+    box-shadow: 0 2px 10px rgba(181, 119, 42, 0.3);
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        padding: 2rem 1.2rem 1.6rem;
+    }
+    .profile-save-btn {
+        align-self: stretch;
+    }
+}
+.profile-bio-readonly {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface2);
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.profile-bio-empty {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    font-style: italic;
+}
+
+.participant-link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.participant-link:hover {
+    text-decoration: underline;
+}

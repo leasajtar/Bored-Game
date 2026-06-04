@@ -29,7 +29,6 @@ public class JoinController {
     @PostMapping("/join")
     public String join(@RequestParam Integer eventId, HttpSession session) {
 
-        // login provjera
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId == null) {
             return "redirect:/login";
@@ -45,18 +44,15 @@ public class JoinController {
         Event event = eventOpt.get();
         User user = userOpt.get();
 
-        // join provjera
         if (joiningRepo.existsByEventIdAndUserId(eventId, userId)) {
             return "redirect:/find?error=already_joined";
         }
 
-        // punost eventa
         int currentCount = joiningRepo.countByEventId(eventId);
         if (currentCount >= event.getMaxPlayers()) {
             return "redirect:/find?error=full";
         }
 
-        // join spremanje
         Joining joining = new Joining();
         joining.setEvent(event);
         joining.setUser(user);
@@ -72,7 +68,6 @@ public class JoinController {
             return "redirect:/login";
         }
 
-        // Onemogućavanje napuštanja eventa koji si organizirao
         Optional<Event> eventOpt = eventRepo.findById(eventId);
         if (eventOpt.isEmpty()) {
             return "redirect:/find";
@@ -83,6 +78,32 @@ public class JoinController {
         }
 
         joiningRepo.deleteByEventIdAndUserId(eventId, userId);
+
+        return "redirect:/find";
+    }
+
+    @PostMapping("/delete-event")
+    public String deleteEvent(@RequestParam Integer eventId, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        Optional<Event> eventOpt = eventRepo.findById(eventId);
+        if (eventOpt.isEmpty()) {
+            return "redirect:/find";
+        }
+
+        Event event = eventOpt.get();
+
+        // Samo organizator može obrisati event
+        if (event.getOrganizator() == null || event.getOrganizator().getId() != userId) {
+            return "redirect:/find?error=not_organizer";
+        }
+
+        // Prvo obriši sve joininge, pa onda event
+        joiningRepo.deleteByEventId(eventId);
+        eventRepo.delete(event);
 
         return "redirect:/find";
     }

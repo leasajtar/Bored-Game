@@ -1,6 +1,7 @@
 package com.boredgame.controller;
 
 import com.boredgame.entity.Event;
+import com.boredgame.entity.Joining;
 import com.boredgame.repos.JoiningRepo;
 import com.boredgame.service.EventService;
 import jakarta.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class FindController {
@@ -45,6 +47,7 @@ public class FindController {
         Map<Integer, Boolean> isFull = new HashMap<>();
         Map<Integer, Boolean> isOrganizer = new HashMap<>();
         Map<Integer, String> gameTypes = new HashMap<>();
+        Map<Integer, List<String>> eventParticipants = new HashMap<>();
 
         for (Event event : events) {
             int joined = joiningRepo.countByEventId(event.getId());
@@ -64,6 +67,13 @@ public class FindController {
                             event.getOrganizator().getId() == userId);
 
             gameTypes.put(event.getId(), getGameType(event.getNazivIgre()));
+
+            // Dohvati listu usernamea prijavljenih igrača
+            List<String> participants = joiningRepo.findByEventId(event.getId())
+                    .stream()
+                    .map(j -> j.getUser().getUsername())
+                    .collect(Collectors.toList());
+            eventParticipants.put(event.getId(), participants);
         }
 
         model.addAttribute("gameTypes", gameTypes);
@@ -71,7 +81,8 @@ public class FindController {
         model.addAttribute("currentPlayers", currentPlayers);
         model.addAttribute("userJoined", userJoined);
         model.addAttribute("isFull", isFull);
-        model.addAttribute("isOrganizer", isOrganizer);  // NEW
+        model.addAttribute("isOrganizer", isOrganizer);
+        model.addAttribute("eventParticipants", eventParticipants);
         model.addAttribute("loggedIn", userId != null);
         model.addAttribute("username", session.getAttribute("username"));
 

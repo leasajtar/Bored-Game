@@ -60,7 +60,7 @@ public class UserController {
                         @RequestParam String password,
                         HttpSession session) {
 
-        User user = usersRepos.findByUsername(username);
+        User user = usersRepos.findByUsername(username).orElse(null);
 
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("userId", user.getId());

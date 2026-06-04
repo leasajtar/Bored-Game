@@ -189,3 +189,27 @@ if (eventForm) {
 
 
 }
+// ===================== CUSTOM DELETE EVENT MODAL =====================
+
+function openDeleteModal(btn) {
+    // Dohvati eventId iz skrivenog inputa unutar istog parent diva
+    const parent = btn.parentElement;
+    const hiddenInput = parent.querySelector('.delete-event-id');
+    const eventId = hiddenInput ? hiddenInput.value : null;
+
+    if (!eventId) return;
+
+    document.getElementById('deleteEventIdInput').value = eventId;
+    document.getElementById('deleteModalOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+// Zatvori modal na Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDeleteModal();
+});

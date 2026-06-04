@@ -15,57 +15,37 @@
     <div class="container-fluid">
         <div class="nav-content">
             <div class="nav-left">
-                <!-- LEFT SIDE -->
                 <div class="logo">
                     <img th:src="@{/images/bored-game-text.png}" alt="bored game logo" height="50">
                 </div>
-
-                <!-- DESKTOP MENU -->
                 <div class="nav-links">
-                    <a th:href="@{/find}">
-                        <button class="left_btns">Pronađi</button>
-                    </a>
-                    <a th:href="@{/organiziranje}">
-                        <button class="left_btns">Organiziraj</button>
-                    </a>
+                    <a th:href="@{/find}"><button class="left_btns">Pronađi</button></a>
+                    <a th:href="@{/organiziranje}"><button class="left_btns">Organiziraj</button></a>
                 </div>
-
-                <!-- HAMBURGER -->
                 <button class="hamburger-btn" onclick="toggleMenu()" type="button">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-
-                <!-- MOBILE MENU -->
                 <div class="nav-menu" id="navMenu">
                     <a th:href="@{/find}"><button class="left_btns">Pronađi</button></a>
                     <a th:href="@{/organiziranje}"><button class="left_btns">Organiziraj</button></a>
                 </div>
             </div>
 
-
-            <!-- SPACER -->
             <div class="flex-grow-1"></div>
 
-            <!-- RIGHT SIDE -->
             <div class="nav-right">
                 <div th:if="${loggedIn}">
                     <span class="nav-username" th:text="'Hej, ' + ${username}"></span>
-                    <a th:href="@{/logout}">
-                        <button class="login_btn">Log Out</button>
-                    </a>
+                    <a th:href="@{/profile}"><button class="profile_btn" title="Moj profil"><i class="fa-solid fa-circle-user"></i></button></a>
+                    <a th:href="@{/logout}"><button class="login_btn">Log Out</button></a>
                 </div>
-
                 <div th:unless="${loggedIn}">
-                    <a th:href="@{/login}">
-                        <button class="login_btn">Log In</button>
-                    </a>
+                    <a th:href="@{/login}"><button class="login_btn">Log In</button></a>
                 </div>
-
                 <a th:href="@{/aboutus}">
                     <button class="info_btn"><i class="fa-regular fa-circle-question"></i></button>
                 </a>
             </div>
-
         </div>
     </div>
 </section>
@@ -83,12 +63,10 @@
 
         <div id="filterPopup" class="filter-popup">
             <div class="filter-popup-content">
-
                 <div class="filter-popup-header">
                     <h4>Filteri</h4>
                     <button type="button" class="filter-close-btn" onclick="closeFilterPopup()">×</button>
                 </div>
-
                 <div class="filter-box">
                     <select id="filterCafe" class="filter-input">
                         <option value="">Svi kafići</option>
@@ -97,14 +75,12 @@
                                 th:text="${event.kafic.name}">
                         </option>
                     </select>
-
                     <select id="filterLevel" class="filter-input">
                         <option value="">Sve razine</option>
                         <option value="1">Početnička</option>
                         <option value="2">Ležerna</option>
                         <option value="3">Kompetitivna</option>
                     </select>
-
                     <select id="filterGame" class="filter-input">
                         <option value="">Sve igre</option>
                         <option value="Alias">Alias</option>
@@ -119,68 +95,73 @@
                         <option value="Vukodlak">Vukodlak</option>
                         <option value="Šah">Šah</option>
                     </select>
-
                     <input type="date" id="filterDate" class="filter-input">
-
-                    <button type="button" class="join-btn" onclick="filterEvents(); closeFilterPopup();">
-                        Primijeni filtere
-                    </button>
-
-                    <button type="button" class="join-btn" onclick="clearFilters(); closeFilterPopup();">
-                        Očisti filtere
-                    </button>
+                    <button type="button" class="join-btn" onclick="filterEvents(); closeFilterPopup();">Primijeni filtere</button>
+                    <button type="button" class="join-btn" onclick="clearFilters(); closeFilterPopup();">Očisti filtere</button>
                 </div>
-
             </div>
         </div>
 
         <p th:if="${param.error != null and param.error[0] == 'full'}" class="error-msg">
             Ovaj event je pun!
         </p>
-        
-        
         <p th:if="${param.error != null and param.error[0] == 'already_joined'}" class="error-msg">
             Već si se priključio ovom eventu!
         </p>
+
+        <!-- EVENT KARTICE -->
         <div class="event-card"
              th:each="event : ${events}"
-             th:attr="
-        data-cafe-id=${event.kafic.id},
-        data-level=${event.level},
-        data-date=${#temporals.format(event.datumVrijeme, 'yyyy-MM-dd')},
-        data-game=${event.nazivIgre}
-     ">
+             th:attr="data-cafe-id=${event.kafic.id},
+                      data-level=${event.level},
+                      data-date=${#temporals.format(event.datumVrijeme, 'yyyy-MM-dd')},
+                      data-game=${event.nazivIgre}">
+
             <div class="event-info">
                 <span class="event-cafe" th:text="${event.kafic.name}"></span>
                 <span class="event-game" th:text="${event.nazivIgre}"></span>
                 <span class="event-level"
                       th:text="'Razina: ' + (${event.level} == '1' ? 'Početnička' :
-                       (${event.level} == '2' ? 'Ležerna' : 'Kompetitivna'))">
-        </span>
-                <span class="event-time" th:text="${#temporals.format(event.datumVrijeme, 'dd.MM.yyyy HH:mm')}"></span>
+                               (${event.level} == '2' ? 'Ležerna' : 'Kompetitivna'))">
+                </span>
+                <span class="event-time"
+                      th:text="${#temporals.format(event.datumVrijeme, 'dd.MM.yyyy HH:mm')}"></span>
                 <span class="event-spots"
                       th:text="${currentPlayers[event.id]} + ' / ' + ${event.maxPlayers} + ' igrača'"></span>
+
+                <!-- LISTA PRIJAVLJENIH IGRAČA -->
+                <span class="event-players-list">
+                    <th:block th:each="participant, iter : ${eventParticipants[event.id]}">
+                    <a th:href="@{'/profile/' + ${participant}}"
+                    class="participant-link"
+                    th:text="${participant}"></a><th:block th:if="${!iter.last}">, </th:block>
+                    </th:block>
+                </span>
             </div>
 
             <!-- Nije ulogiran -->
             <a th:if="${!loggedIn}" th:href="@{/login}" class="join-btn">Prijavi se</a>
 
-            <!-- Organizator -->
-            <button th:if="${loggedIn and isOrganizer[event.id]}"
-                    class="join-btn" disabled>Organizator</button>
+            <!-- Organizator: može obrisati event -->
+            <form th:if="${loggedIn and isOrganizer[event.id]}"
+                  th:action="@{/delete-event}" method="post"
+                  onsubmit="return confirm('Sigurno želiš obrisati ovaj event?');">
+                <input type="hidden" name="eventId" th:value="${event.id}">
+                <button class="join-btn delete-btn" type="submit">Obriši event</button>
+            </form>
 
-            <!-- Pun (i nije organizator i nije joinao) -->
+            <!-- Pun (nije organizator, nije joinao) -->
             <button th:if="${loggedIn and !isOrganizer[event.id] and !userJoined[event.id] and isFull[event.id]}"
                     class="join-btn" disabled>Puno</button>
 
-            <!-- Joinao, nije organizator - može odustati -->
+            <!-- Joinao, nije organizator — može odustati -->
             <form th:if="${loggedIn and !isOrganizer[event.id] and userJoined[event.id]}"
                   th:action="@{/leave}" method="post">
                 <input type="hidden" name="eventId" th:value="${event.id}">
                 <button class="join-btn leave-btn" type="submit">Odustani</button>
             </form>
 
-            <!-- Može joinati -->
+            <!-- Može se pridružiti -->
             <form th:if="${loggedIn and !isOrganizer[event.id] and !userJoined[event.id] and !isFull[event.id]}"
                   th:action="@{/join}" method="post">
                 <input type="hidden" name="eventId" th:value="${event.id}">
