@@ -17,7 +17,9 @@ public class Event {
 
     private String game_name;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime event_datetime;    private Integer max_players;
+    @Column(name = "event_datetime")
+    private LocalDateTime eventDateTime;
+    private Integer max_players;
     private String status;
     private String level;
 
@@ -35,7 +37,7 @@ public class Event {
     // --- Getters (unchanged) ---
     public Integer getId()                    { return id; }
     public String getNazivIgre()              { return game_name; }
-    public LocalDateTime getDatumVrijeme()    { return event_datetime; }
+    public LocalDateTime getDatumVrijeme()    { return eventDateTime; }
     public Integer getMaxPlayers()            { return max_players; }
     public String getStatus()                 { return status; }
     public Cafe getKafic()                    { return cafe_id; }
@@ -45,7 +47,7 @@ public class Event {
 
     // --- Setters (new) ---
     public void setGameName(String gameName)          { this.game_name = gameName; }
-    public void setEventDatetime(LocalDateTime dt)    { this.event_datetime = dt; }
+    public void setEventDatetime(LocalDateTime dt)    { this.eventDateTime = dt; }
     public void setMaxPlayers(Integer maxPlayers)     { this.max_players = maxPlayers; }
     public void setStatus(String status)              { this.status = status; }
     public void setLevel(String level)                { this.level = level; }

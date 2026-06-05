@@ -86,4 +86,31 @@ public class JoinController {
 
         return "redirect:/find";
     }
+
+
+    @PostMapping("/delete-event")
+    public String deleteEvent(@RequestParam Integer eventId, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
+
+        Optional<Event> eventOpt = eventRepo.findById(eventId);
+        if (eventOpt.isEmpty()) {
+            return "redirect:/find";
+        }
+
+        Event event = eventOpt.get();
+
+        // Samo organizator može obrisati event
+        if (event.getOrganizator() == null || event.getOrganizator().getId() != userId) {
+            return "redirect:/find?error=not_organizer";
+        }
+
+        // Prvo obriši sve joininge, pa onda event
+        joiningRepo.deleteByEventId(eventId);
+        eventRepo.delete(event);
+
+        return "redirect:/find";
+    }
 }

@@ -37,6 +37,9 @@
             <div class="nav-right">
                 <div th:if="${loggedIn}">
                     <span class="nav-username" th:text="'Hej, ' + ${username}"></span>
+
+                    <a th:href="@{/profile}"><button class="profile_btn" title="Moj profil"><i class="fa-solid fa-circle-user"></i></button></a>
+
                     <a th:href="@{/logout}">
                         <button class="login_btn">Log Out</button>
                     </a>
