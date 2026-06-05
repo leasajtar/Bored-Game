@@ -185,9 +185,13 @@
             <!-- Nije ulogiran -->
             <a th:if="${!loggedIn}" th:href="@{/login}" class="join-btn">Prijavi se</a>
 
-            <!-- Organizator -->
-            <button th:if="${loggedIn and isOrganizer[event.id]}"
-                    class="join-btn" disabled>Organizator</button>
+            <!-- Organizator: može obrisati event -->
+            <form th:if="${loggedIn and isOrganizer[event.id]}"
+                  th:action="@{/delete-event}" method="post"
+                  onsubmit="return confirm('Sigurno želiš obrisati ovaj event?');">
+                <input type="hidden" name="eventId" th:value="${event.id}">
+                <button class="join-btn delete-btn" type="submit">Obriši event</button>
+            </form>
 
             <!-- Pun (i nije organizator i nije joinao) -->
             <button th:if="${loggedIn and !isOrganizer[event.id] and !userJoined[event.id] and isFull[event.id]}"
