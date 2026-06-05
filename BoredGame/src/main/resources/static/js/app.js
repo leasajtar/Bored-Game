@@ -262,7 +262,6 @@ function pickCompetitionGame(gameName, element) {
 // ===================== CUSTOM DELETE EVENT MODAL =====================
 
 function openDeleteModal(btn) {
-    // Dohvati eventId iz skrivenog inputa unutar istog parent diva
     const parent = btn.parentElement;
     const hiddenInput = parent.querySelector('.delete-event-id');
     const eventId = hiddenInput ? hiddenInput.value : null;
@@ -270,16 +269,12 @@ function openDeleteModal(btn) {
     if (!eventId) return;
 
     document.getElementById('deleteEventIdInput').value = eventId;
-    document.getElementById('deleteModalOverlay').classList.add('show');
+    const overlay = document.getElementById('deleteModalOverlay');
+    overlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
 function closeDeleteModal() {
-    document.getElementById('deleteModalOverlay').classList.remove('show');
+    document.getElementById('deleteModalOverlay').style.display = 'none';
     document.body.style.overflow = '';
 }
-
-// Zatvori modal na Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeDeleteModal();
-});
