@@ -19,6 +19,22 @@
                     <img th:src="@{/images/bored-game-text.png}" alt="logo">
                 </div>
 
+                <button class="hamburger-btn" onclick="toggleMenu()" type="button">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="nav-menu" id="navMenu">
+                    <a th:href="@{/find}">
+                        <button class="left_btns">Pronađi</button>
+                    </a>
+                    <a th:href="@{/organiziranje}">
+                        <button class="left_btns">Organiziraj</button>
+                    </a>
+                    <a th:href="@{/events}">
+                        <button class="left_btns">Natjecanja i kvizovi</button>
+                    </a>
+                </div>
+
                 <div class="nav-links">
                     <a th:href="@{/find}">
                         <button class="left_btns">Pronađi</button>
@@ -35,10 +51,22 @@
             <div class="flex-grow-1"></div>
 
             <div class="nav-right">
-                <div th:if="${loggedIn}">
+                <div th:if="${loggedIn}" class="logged-user-nav">
                     <span class="nav-username" th:text="'Hej, ' + ${username}"></span>
 
-                    <a th:href="@{/profile}"><button class="profile_btn" title="Moj profil"><i class="fa-solid fa-circle-user"></i></button></a>
+                    <a th:href="@{/profile}">
+                        <button class="profile_btn" title="Moj profil">
+
+                            <img th:if="${profilePicture != null}"
+                                 th:src="@{'/profile-pictures/' + ${profilePicture}}"
+                                 class="nav-profile-image"
+                                 alt="Profil">
+
+                            <i th:unless="${profilePicture != null}"
+                               class="fa-solid fa-circle-user"></i>
+
+                        </button>
+                    </a>
 
                     <a th:href="@{/logout}">
                         <button class="login_btn">Log Out</button>

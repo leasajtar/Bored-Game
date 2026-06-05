@@ -53,7 +53,11 @@ if (userForm) {
 }
 
 function toggleMenu() {
-    document.getElementById("navMenu").classList.toggle("show");
+    const menu = document.getElementById("navMenu");
+
+    if (menu) {
+        menu.classList.toggle("show");
+    }
 }
 
 // FILTERS FOR FIND PAGE

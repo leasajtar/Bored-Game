@@ -1,13 +1,14 @@
 package com.boredgame.controller;
 
 import com.boredgame.entity.Event;
+import com.boredgame.entity.User;
 import com.boredgame.repos.JoiningRepo;
+import com.boredgame.repos.UsersRepos;
 import com.boredgame.service.EventService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.boredgame.entity.Joining;
 import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +19,12 @@ public class FindController {
 
     private final EventService eventService;
     private final JoiningRepo joiningRepo;
+    private final UsersRepos usersRepos;
 
-    public FindController(EventService eventService, JoiningRepo joiningRepo) {
+    public FindController(EventService eventService, JoiningRepo joiningRepo, UsersRepos usersRepos) {
         this.eventService = eventService;
         this.joiningRepo = joiningRepo;
+        this.usersRepos = usersRepos;
     }
 
     private String getGameType(String gameName) {
@@ -41,6 +44,13 @@ public class FindController {
         List<Event> events = eventService.getOpenEvents();
         Integer userId = (Integer) session.getAttribute("userId");
 
+        if (userId != null) {
+            User user = usersRepos.findById(userId).orElse(null);
+
+            if (user != null) {
+                model.addAttribute("profilePicture", user.getProfilePicture());
+            }
+        }
         Map<Integer, Integer> currentPlayers = new HashMap<>();
         Map<Integer, Boolean> userJoined = new HashMap<>();
         Map<Integer, Boolean> isFull = new HashMap<>();
@@ -74,6 +84,8 @@ public class FindController {
                     .collect(Collectors.toList());
             eventParticipants.put(event.getId(), participants);
         }
+
+
 
         model.addAttribute("gameTypes", gameTypes);
         model.addAttribute("events", events);

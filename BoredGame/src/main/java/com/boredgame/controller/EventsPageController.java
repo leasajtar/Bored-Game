@@ -45,6 +45,10 @@ public class EventsPageController {
         if (usernameObj != null) {
             String username = usernameObj.toString();
             user = userRepository.findByUsername(username);
+
+            if (user != null) {
+                model.addAttribute("profilePicture", user.getProfilePicture());
+            }
         }
 
         for (Competition competition : competitions) {

@@ -779,37 +779,258 @@ a, a:link, a:visited, a:hover, a:active { text-decoration: none; color: inherit;
 /* ===================== RESPONSIVE ===================== */
 
 @media (max-width: 900px) {
-    .organize-content { flex-direction: column; align-items: center; }
-    .left-panel { width: 100%; }
-    .right-panel { width: 100%; }
-    .find-sidebar { width: 300px; }
-    .info-tooltip-text { width: 300px; left: 50%; transform: translateX(-50%); }
+    .nav-content {
+        height: auto;
+        min-height: 64px;
+        padding: 8px 0;
+    }
+
+    .nav-left,
+    .nav-right,
+    .logged-user-nav {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 16px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 10px;
+        flex-direction: column;
+        z-index: 10000;
+        min-width: 220px;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .nav-menu.show {
+        display: flex;
+    }
+
+    .nav-menu a {
+        width: 100%;
+    }
+
+    .nav-menu .left_btns {
+        width: 100%;
+        text-align: left;
+        padding: 12px 16px;
+    }
+
+    .find-wrapper {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 64px);
+    }
+
+    .find-sidebar {
+        width: 100%;
+        min-width: unset;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        align-items: center;
+    }
+
+    .find-sidebar .event-card {
+        width: 100%;
+        max-width: 520px;
+    }
+
+    .find-map {
+        width: 100%;
+        height: 60vh;
+        min-height: 420px;
+        flex: none;
+    }
+
+    .find-map iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    .organize-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .scroll-list {
+        width: 100%;
+    }
+
+    .info-tooltip-text {
+        width: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
 @media (max-width: 728px) {
-    .nav-links { display: none; }
-    .hamburger-btn { display: flex; align-items: center; justify-content: center; }
+    .nav-bar .container-fluid {
+        padding: 0 12px;
+    }
 
-    .find-wrapper { flex-direction: column; height: auto; }
-    .find-sidebar { width: 100%; min-width: unset; max-height: 50vh; border-right: none; border-bottom: 1px solid var(--border); }
-    .find-map { height: 50vh; }
+    .logo img {
+        height: 36px;
+    }
 
-    .organize { padding: 24px 20px; }
-    .label-event { font-size: 1.5rem; padding-bottom: 20px; }
-    .levels-row { flex-direction: column; align-items: flex-start; }
-    .date-time-row { flex-direction: column; align-items: flex-start; }
-    .players-row { flex-direction: column; align-items: flex-start; }
-    .players-row input { width: 100%; }
-    .submit-wrapper .login_submit_btn { width: 100%; }
+    .nav-content {
+        gap: 6px;
+    }
 
-    .login { margin: 40px 16px; padding: 36px 24px; }
-    .gender_btns { flex-wrap: wrap; }
+    .nav-right {
+        gap: 6px;
+    }
 
-    .aboutus { margin: 24px 16px; padding: 32px 24px; }
-    .aboutus-text h1 { font-size: 1.8rem; }
-    .aboutus-info { flex-direction: column; align-items: center; gap: 16px; }
+    .logged-user-nav {
+        gap: 8px;
+    }
 
-    .info-tooltip-text { width: 260px; left: 0; transform: none; }
+    .nav-username {
+        display: none;
+    }
+
+    .login_btn {
+        padding: 7px 12px;
+        font-size: 0.75rem;
+    }
+
+    .profile_btn,
+    .info_btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .nav-profile-image {
+        width: 34px;
+        height: 34px;
+    }
+
+    .form-wrapper {
+        padding: 24px 12px;
+        justify-content: center;
+    }
+
+    .organize,
+    .admin_make,
+    .aboutus,
+    .login,
+    .profile-card {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 28px 18px;
+        text-align: center;
+    }
+
+    .login {
+        margin-top: 32px;
+    }
+
+    .label-event,
+    .center-events-title,
+    .event-section h2,
+    .aboutus-text h1 {
+        text-align: center;
+    }
+
+    .levels-row,
+    .date-time-row,
+    .players-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .levels-group {
+        justify-content: center;
+    }
+
+    .date-time-row input,
+    .cafe,
+    .players-row input {
+        width: 100% !important;
+        max-width: 360px;
+    }
+
+    .players {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .submit-wrapper .login_submit_btn {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .center-events-page {
+        padding: 32px 12px;
+    }
+
+    .center-card-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .big-event-card {
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+    }
+
+    .aboutus-text p {
+        text-align: center;
+    }
+
+    .aboutus-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .profile-wrapper {
+        padding: 32px 12px;
+        justify-content: center;
+    }
+
+    .profile-save-btn {
+        align-self: center;
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .find-sidebar {
+        padding: 22px 12px;
+    }
+
+    .find-map {
+        height: 65vh;
+        min-height: 460px;
+    }
 }
 
 /* ===================== CENTER EVENTS PAGE ===================== */
@@ -1037,6 +1258,39 @@ input[type=number] {
     color: var(--accent);
     border-color: var(--accent);
     background: var(--accent-glow);
+}
+
+.logged-user-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logged-user-nav a {
+    display: flex;
+    align-items: center;
+}
+
+.nav-username {
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+.profile_btn,
+.login_btn,
+.info_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-profile-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
 }
 
 /* ===================== CUSTOM CONFIRM MODAL ===================== */
@@ -1363,4 +1617,22 @@ input[type=number] {
 
 .participant-link:hover {
     text-decoration: underline;
+}
+
+.nav-profile-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.profile_btn {
+    overflow: hidden;
+    padding: 0px;
+    align-items: center;
+    justify-content: center;
 }
