@@ -180,7 +180,17 @@
                 <span class="event-time" th:text="${#temporals.format(event.datumVrijeme, 'dd.MM.yyyy HH:mm')}"></span>
                 <span class="event-spots"
                       th:text="${currentPlayers[event.id]} + ' / ' + ${event.maxPlayers} + ' igrača'"></span>
+
+                <!-- LISTA PRIJAVLJENIH IGRAČA -->
+                <span class="event-players-list">
+                    <th:block th:each="participant, iter : ${eventParticipants[event.id]}">
+                    <a th:href="@{'/profile/' + ${participant}}"
+                       class="participant-link"
+                       th:text="${participant}"></a><th:block th:if="${!iter.last}">, </th:block>
+                    </th:block>
+                </span>
             </div>
+
 
             <!-- Nije ulogiran -->
             <a th:if="${!loggedIn}" th:href="@{/login}" class="join-btn">Prijavi se</a>
